@@ -1,122 +1,135 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import Navbar from './components/Navbar.jsx';
+import Hero from './components/Hero.jsx';
+import CategoryFilter from './components/CategoryFilter.jsx';
+import MenuGrid from './components/MenuGrid.jsx';
+import ItemModal from './components/ItemModal.jsx';
+import CartDrawer from './components/CartDrawer.jsx';
+import { MENU_ITEMS } from './data/menuData.js';
 
-function App() {
-  const [count, setCount] = useState(0)
+const lineKey = (item, addOns) =>
+  `${item.id}|${addOns
+    .map((a) => a.id)
+    .sort()
+    .join(',')}`;
+
+export default function App() {
+  const [category, setCategory] = useState('all');
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cart, setCart] = useState([]);
+
+  const filteredItems = useMemo(
+    () =>
+      category === 'all'
+        ? MENU_ITEMS
+        : MENU_ITEMS.filter((item) => item.category === category),
+    [category]
+  );
+
+  const cartCount = useMemo(() => cart.reduce((sum, e) => sum + e.quantity, 0), [cart]);
+
+  const addToCart = useCallback((item, addOns = [], quantity = 1) => {
+    const key = lineKey(item, addOns);
+    setCart((prev) => {
+      const existing = prev.find((e) => e.key === key);
+      if (existing) {
+        return prev.map((e) =>
+          e.key === key ? { ...e, quantity: e.quantity + quantity } : e
+        );
+      }
+      return [...prev, { key, item, addOns, quantity }];
+    });
+  }, []);
+
+  const updateQty = useCallback((key, quantity) => {
+    setCart((prev) =>
+      quantity < 1
+        ? prev.filter((e) => e.key !== key)
+        : prev.map((e) => (e.key === key ? { ...e, quantity } : e))
+    );
+  }, []);
+
+  const removeLine = useCallback((key) => {
+    setCart((prev) => prev.filter((e) => e.key !== key));
+  }, []);
+
+  const overlayOpen = selectedItem !== null || cartOpen;
+
+  // Body scroll lock while the modal or drawer is open.
+  useEffect(() => {
+    document.body.style.overflow = overlayOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [overlayOpen]);
+
+  // Escape closes whatever overlay is open.
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key !== 'Escape') return;
+      if (selectedItem) setSelectedItem(null);
+      else if (cartOpen) setCartOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [selectedItem, cartOpen]);
+
+  const handleCheckout = useCallback(() => {
+    setCart([]);
+    setCartOpen(false);
+  }, []);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="bg-mesh min-h-screen">
+      <Navbar cartCount={cartCount} onCartOpen={() => setCartOpen(true)} />
 
-      <div className="ticks"></div>
+      <main>
+        <Hero />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <section id="menu" className="mx-auto w-[min(92%,72rem)] px-2 pb-32">
+          <div className="mb-10 text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">
+              The menu
+            </p>
+            <h2 className="font-display mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Served on <span className="heading-gradient text-glow-amber">Glass</span>
+            </h2>
+            <p className="mx-auto mt-3 max-w-md text-sm text-slate-400">
+              Every dish floats on its own glass pedestal. Hover to feel it,
+              tap to build it your way.
+            </p>
+          </div>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+          <CategoryFilter active={category} onChange={setCategory} />
+          <MenuGrid
+            items={filteredItems}
+            onOpen={setSelectedItem}
+            onAdd={(item) => addToCart(item)}
+          />
+        </section>
+      </main>
+
+      <footer className="border-t border-white/10 py-8 text-center text-xs text-slate-500">
+        GlassBite — crafted with glass, fire & 60fps motion.
+      </footer>
+
+      {selectedItem && (
+        <ItemModal
+          item={selectedItem}
+          onClose={() => setSelectedItem(null)}
+          onAdd={addToCart}
+        />
+      )}
+
+      <CartDrawer
+        open={cartOpen}
+        cart={cart}
+        onClose={() => setCartOpen(false)}
+        onUpdateQty={updateQty}
+        onRemove={removeLine}
+        onCheckout={handleCheckout}
+      />
+    </div>
+  );
 }
-
-export default App
