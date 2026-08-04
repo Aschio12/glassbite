@@ -1,111 +1,94 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  body {
+    @apply bg-slate-950 text-slate-100 font-sans antialiased;
+    overflow-x: hidden;
+  }
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
+  ::selection {
+    @apply bg-amber-500/80 text-slate-950;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #f97316, #dc2626);
+    border-radius: 999px;
+    border: 2px solid #020617;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+@layer components {
+  /* Core glassmorphic surface */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl;
   }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+  .glass-strong {
+    @apply bg-white/[0.14] backdrop-blur-xl border border-white/25 shadow-2xl;
+  }
+
+  .glass-soft {
+    @apply bg-white/[0.06] backdrop-blur-sm border border-white/10;
+  }
+
+  /* Neon text glow accents */
+  .text-glow-amber {
+    text-shadow:
+      0 0 18px rgba(251, 146, 60, 0.55),
+      0 0 46px rgba(249, 115, 22, 0.3);
+  }
+
+  .text-glow-red {
+    text-shadow:
+      0 0 18px rgba(248, 113, 113, 0.55),
+      0 0 46px rgba(220, 38, 38, 0.3);
+  }
+
+  /* Gradient display heading */
+  .heading-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(100deg, #fde68a 0%, #fb923c 40%, #ef4444 80%);
   }
 }
 
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+@layer utilities {
+  /* Deep gradient mesh background layers */
+  .bg-mesh {
+    background-color: #020617;
+    background-image:
+      radial-gradient(at 18% 12%, rgba(249, 115, 22, 0.22) 0px, transparent 55%),
+      radial-gradient(at 82% 8%, rgba(220, 38, 38, 0.18) 0px, transparent 50%),
+      radial-gradient(at 75% 78%, rgba(251, 146, 60, 0.14) 0px, transparent 55%),
+      radial-gradient(at 12% 85%, rgba(234, 88, 12, 0.16) 0px, transparent 50%);
   }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+  .preserve-3d {
+    transform-style: preserve-3d;
   }
-}
-p {
-  margin: 0;
-}
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+  .perspective-1200 {
+    perspective: 1200px;
+  }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .will-change-transform {
+    will-change: transform;
+  }
 }
