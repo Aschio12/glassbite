@@ -77,7 +77,7 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
       >
         <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
           <h2 className="flex items-center gap-2.5 font-display text-xl font-bold">
-            <ShoppingBag className="h-5 w-5 text-amber-300" />
+            <ShoppingBag className="h-5 w-5 text-emerald-400" />
             Your Order
           </h2>
           <button
@@ -144,7 +144,7 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
                               type="button"
                               aria-label="Decrease quantity"
                               onClick={() => onUpdateQty(entry.key, entry.quantity - 1)}
-                              className="grid h-7 w-7 place-items-center text-slate-300 transition-colors hover:text-amber-300"
+                              className="grid h-7 w-7 place-items-center text-slate-300 transition-colors hover:text-emerald-400"
                             >
                               <Minus className="h-3.5 w-3.5" />
                             </button>
@@ -155,12 +155,12 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
                               type="button"
                               aria-label="Increase quantity"
                               onClick={() => onUpdateQty(entry.key, entry.quantity + 1)}
-                              className="grid h-7 w-7 place-items-center text-slate-300 transition-colors hover:text-amber-300"
+                              className="grid h-7 w-7 place-items-center text-slate-300 transition-colors hover:text-emerald-400"
                             >
                               <Plus className="h-3.5 w-3.5" />
                             </button>
                           </div>
-                          <span className="font-display text-sm font-bold text-amber-300">
+                          <span className="font-display text-sm font-bold text-emerald-400">
                             {formatPrice(lineTotal)}
                           </span>
                         </div>
@@ -193,7 +193,7 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
             <button
               type="button"
               onClick={onCheckout}
-              className="mt-4 w-full rounded-2xl bg-gradient-to-r from-amber-400 to-red-500 py-3.5 font-display text-sm font-bold text-slate-950 shadow-glow-amber transition-transform duration-200 hover:scale-[1.02] active:scale-95"
+              className="mt-4 w-full rounded-2xl bg-gradient-to-r from-emerald-400 to-red-500 py-3.5 font-display text-sm font-bold text-slate-950 shadow-[0_0_15px_rgba(52,211,153,0.5)] transition-transform duration-200 hover:scale-[1.02] active:scale-95"
             >
               Checkout · {formatPrice(total)}
             </button>

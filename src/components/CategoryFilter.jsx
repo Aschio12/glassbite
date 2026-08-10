@@ -49,7 +49,7 @@ export default function CategoryFilter({ active, onChange }) {
       <span
         ref={indicatorRef}
         aria-hidden="true"
-        className="absolute bottom-1.5 left-0 top-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-red-500 shadow-glow-amber will-change-transform"
+        className="absolute bottom-1.5 left-0 top-1.5 rounded-xl bg-gradient-to-r from-emerald-400 to-emerald-600 shadow-[0_0_15px_rgba(52,211,153,0.5)] will-change-transform"
         style={{ width: 0 }}
       />
       {CATEGORIES.map((cat) => {
@@ -63,7 +63,7 @@ export default function CategoryFilter({ active, onChange }) {
             data-category={cat.id}
             onClick={() => onChange(cat.id)}
             className={`relative z-10 whitespace-nowrap rounded-xl px-5 py-2.5 font-display text-sm font-semibold transition-colors duration-300 ${
-              isActive ? 'text-slate-950' : 'text-slate-300 hover:text-amber-300'
+              isActive ? 'text-slate-950' : 'text-slate-300 hover:text-emerald-400'
             }`}
           >
             {cat.label}

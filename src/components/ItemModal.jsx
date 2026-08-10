@@ -94,7 +94,7 @@ export default function ItemModal({ item, onClose, onAdd }) {
       >
         <div className="grid md:grid-cols-2">
           {/* Visual side — floating ingredient depth layers */}
-          <div className="perspective-1200 relative flex min-h-72 items-center justify-center overflow-hidden rounded-t-3xl bg-gradient-to-br from-amber-500/15 via-transparent to-red-600/15 p-10 md:rounded-l-3xl md:rounded-tr-none">
+          <div className="perspective-1200 relative flex min-h-72 items-center justify-center overflow-hidden rounded-t-3xl bg-gradient-to-br from-emerald-500/15 via-transparent to-red-600/15 p-10 md:rounded-l-3xl md:rounded-tr-none">
             <div className="preserve-3d relative aspect-square w-full max-w-64">
               {layers.map((layer, i) => (
                 <img
@@ -105,11 +105,11 @@ export default function ItemModal({ item, onClose, onAdd }) {
                   data-depth={layer.depth}
                   data-scale={layer.scale}
                   data-opacity={layer.opacity}
-                  className={`depth-layer absolute inset-0 h-full w-full rounded-3xl border border-white/20 object-cover shadow-2xl will-change-transform ${layer.blur}`}
+                  className={`depth-layer absolute inset-0 h-full w-full rounded-3xl border border-white/20 object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] shadow-2xl will-change-transform ${layer.blur}`}
                 />
               ))}
             </div>
-            <span className="glass absolute left-5 top-5 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-amber-300">
+            <span className="glass absolute left-5 top-5 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-emerald-400">
               {item.category}
             </span>
           </div>
@@ -120,7 +120,7 @@ export default function ItemModal({ item, onClose, onAdd }) {
               type="button"
               onClick={onClose}
               aria-label="Close details"
-              className="absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-xl border border-white/15 bg-white/10 text-slate-300 transition-colors hover:border-red-400/40 hover:text-red-300"
+              className="absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-xl border border-white/15 bg-white/10 text-slate-300 transition-colors hover:border-emerald-400/40 hover:text-emerald-300"
             >
               <X className="h-4.5 w-4.5" />
             </button>
@@ -134,13 +134,13 @@ export default function ItemModal({ item, onClose, onAdd }) {
 
             <div className="modal-stagger mt-4 flex flex-wrap gap-2 text-xs text-slate-300">
               <span className="glass-soft flex items-center gap-1.5 rounded-full px-3 py-1.5">
-                <Flame className="h-3.5 w-3.5 text-red-400" /> {item.specs.calories} kcal
+                <Flame className="h-3.5 w-3.5 text-emerald-400" /> {item.specs.calories} kcal
               </span>
               <span className="glass-soft flex items-center gap-1.5 rounded-full px-3 py-1.5">
-                <Clock className="h-3.5 w-3.5 text-amber-300" /> {item.specs.prepTime}
+                <Clock className="h-3.5 w-3.5 text-emerald-400" /> {item.specs.prepTime}
               </span>
               <span className="glass-soft flex items-center gap-1.5 rounded-full px-3 py-1.5">
-                <Ruler className="h-3.5 w-3.5 text-orange-300" /> {item.specs.size}
+                <Ruler className="h-3.5 w-3.5 text-emerald-300" /> {item.specs.size}
               </span>
             </div>
 
@@ -157,7 +157,7 @@ export default function ItemModal({ item, onClose, onAdd }) {
                       key={addOn.id}
                       className={`flex cursor-pointer items-center justify-between rounded-xl border px-3.5 py-2.5 text-sm transition-all duration-200 ${
                         checked
-                          ? 'border-amber-400/50 bg-amber-400/10 shadow-glow-amber'
+                          ? 'border-emerald-400/50 bg-emerald-400/10 shadow-[0_0_15px_rgba(52,211,153,0.5)]'
                           : 'border-white/10 bg-white/5 hover:border-white/25'
                       }`}
                     >
@@ -166,11 +166,11 @@ export default function ItemModal({ item, onClose, onAdd }) {
                           type="checkbox"
                           checked={checked}
                           onChange={() => toggleAddOn(addOn.id)}
-                          className="h-4 w-4 accent-amber-500"
+                          className="h-4 w-4 accent-emerald-500"
                         />
                         {addOn.label}
                       </span>
-                      <span className="font-semibold text-amber-300">
+                      <span className="font-semibold text-emerald-400">
                         +{formatPrice(addOn.price)}
                       </span>
                     </label>
@@ -186,7 +186,7 @@ export default function ItemModal({ item, onClose, onAdd }) {
                   type="button"
                   aria-label="Decrease quantity"
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="grid h-10 w-10 place-items-center text-slate-300 transition-colors hover:text-amber-300"
+                  className="grid h-10 w-10 place-items-center text-slate-300 transition-colors hover:text-emerald-400"
                 >
                   <Minus className="h-4 w-4" />
                 </button>
@@ -195,7 +195,7 @@ export default function ItemModal({ item, onClose, onAdd }) {
                   type="button"
                   aria-label="Increase quantity"
                   onClick={() => setQuantity((q) => Math.min(20, q + 1))}
-                  className="grid h-10 w-10 place-items-center text-slate-300 transition-colors hover:text-amber-300"
+                  className="grid h-10 w-10 place-items-center text-slate-300 transition-colors hover:text-emerald-400"
                 >
                   <Plus className="h-4 w-4" />
                 </button>
@@ -204,7 +204,7 @@ export default function ItemModal({ item, onClose, onAdd }) {
               <button
                 type="button"
                 onClick={handleAdd}
-                className="flex-1 rounded-xl bg-gradient-to-r from-amber-400 to-red-500 px-5 py-3 font-display text-sm font-bold text-slate-950 shadow-glow-amber transition-transform duration-200 hover:scale-[1.03] active:scale-95"
+                className="flex-1 rounded-xl bg-gradient-to-r from-emerald-400 to-red-500 px-5 py-3 font-display text-sm font-bold text-slate-950 shadow-[0_0_15px_rgba(52,211,153,0.5)] transition-transform duration-200 hover:scale-[1.03] active:scale-95"
               >
                 Add to cart · {formatPrice(total)}
               </button>

@@ -88,18 +88,18 @@ export default function App() {
         <Hero />
 
         <section id="menu" className="mx-auto w-[min(92%,72rem)] px-2 pb-32">
-          <div className="mb-10 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">
-              The menu
+          <motion.div className="mb-6 flex flex-col items-center text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-400">
+              A Taste of Luxury
             </p>
-            <h2 className="font-display mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Served on <span className="heading-gradient text-glow-amber">Glass</span>
-            </h2>
-            <p className="mx-auto mt-3 max-w-md text-sm text-slate-400">
+            <h1 className="font-display mt-3 text-5xl font-black leading-[1.1] tracking-tight sm:text-7xl">
+              Served on <span className="text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]">Glass</span>
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-200 sm:text-xl drop-shadow-md">
               Every dish floats on its own glass pedestal. Hover to feel it,
               tap to build it your way.
             </p>
-          </div>
+          </motion.div>
 
           <CategoryFilter active={category} onChange={setCategory} />
           <MenuGrid
@@ -110,8 +110,9 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10 py-8 text-center text-xs text-slate-500">
-        GlassBite — crafted with glass, fire & 60fps motion.
+      <footer className="border-t border-white/10 bg-black/40 backdrop-blur-md py-12 text-center text-slate-400">
+        <p className="mb-4 font-display text-2xl font-bold text-white">Glassbite</p>
+        <p className="text-sm">Experience the taste of luxury.</p>
       </footer>
 
       {selectedItem && (
