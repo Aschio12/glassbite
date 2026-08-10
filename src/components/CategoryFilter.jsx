@@ -43,7 +43,7 @@ export default function CategoryFilter({ active, onChange }) {
       ref={wrapRef}
       role="tablist"
       aria-label="Menu categories"
-      className="glass relative mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-2xl p-1.5"
+      className="relative mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-2xl p-2 bg-slate-900/80 border border-slate-700/50 backdrop-blur-xl shadow-2xl"
     >
       {/* Sliding active indicator */}
       <span

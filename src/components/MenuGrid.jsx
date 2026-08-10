@@ -24,7 +24,7 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-16 pt-8"
     >
       {items.map((item) => (
         <motion.div
@@ -33,7 +33,7 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
           className="group relative flex flex-col overflow-visible cursor-pointer transition-all duration-500 hover:-translate-y-4"
           onClick={() => onOpen(item)}
         >
-          <div className="relative aspect-[4/3] w-full overflow-hidden flex items-center justify-center p-4">
+          <div className="relative h-64 sm:h-80 w-full overflow-hidden flex items-center justify-center p-4">
             <img
               src={item.image}
               alt={item.name}
@@ -48,9 +48,6 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
                 <h3 className="font-display text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors drop-shadow-md">
                   {item.name}
                 </h3>
-                <p className="mt-2 text-sm text-slate-200 line-clamp-2 leading-relaxed drop-shadow-md">
-                  {item.description}
-                </p>
               </div>
               <p className="font-mono text-lg font-bold text-white shrink-0">
                 ${item.price.toFixed(2)}
