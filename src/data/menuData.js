@@ -1,5 +1,5 @@
 // Centralized menu catalogue for GlassBite.
-// Updated to use transparent HD images and real 3D models.
+// Updated to use transparent HD images.
 
 const CHEESE_ADDON = { id: 'extra-cheese', label: 'Extra Cheese', price: 1.5 };
 const SAUCE_ADDONS = [
@@ -28,7 +28,6 @@ export const MENU_ITEMS = [
     specs: { calories: 780, prepTime: '12 min', size: 'Double stack' },
     price: 12.9,
     image: 'https://www.freepnglogos.com/uploads/burger-png/burger-png-png-images-yellow-images-12.png',
-    model: { url: 'https://vazxmixizvqrz.supabase.co/storage/v1/object/public/models/hamburger/model.gltf', scale: 0.25, shape: 'burger' },
     category: 'burgers',
     addOns: withAddons([{ id: 'bacon', label: 'Crispy Bacon', price: 2.0 }]),
   },
@@ -40,7 +39,6 @@ export const MENU_ITEMS = [
     specs: { calories: 940, prepTime: '14 min', size: 'Combo meal' },
     price: 14.5,
     image: 'https://www.freepnglogos.com/uploads/burger-png/burger-png-transparent-images-17.png',
-    model: { url: 'https://vazxmixizvqrz.supabase.co/storage/v1/object/public/models/hamburger/model.gltf', scale: 0.28, shape: 'burger' },
     category: 'burgers',
     addOns: withAddons([{ id: 'fried-egg', label: 'Fried Egg', price: 1.4 }]),
   },
@@ -52,7 +50,6 @@ export const MENU_ITEMS = [
     specs: { calories: 860, prepTime: '15 min', size: 'Single, stuffed' },
     price: 13.75,
     image: 'https://www.freepnglogos.com/uploads/burger-png/meat-burger-png-transparent-image-pngpix-19.png',
-    model: { url: 'https://vazxmixizvqrz.supabase.co/storage/v1/object/public/models/hamburger/model.gltf', scale: 0.26, shape: 'burger' },
     category: 'burgers',
     addOns: withAddons([{ id: 'jalapeno', label: 'Extra Jalapeños', price: 0.9 }]),
   },
@@ -64,7 +61,6 @@ export const MENU_ITEMS = [
     specs: { calories: 1120, prepTime: '18 min', size: '12 inch' },
     price: 16.9,
     image: 'https://www.freepnglogos.com/uploads/pizza-png/pizza-transparent-background-images-27.png',
-    model: { url: 'https://vazxmixizvqrz.supabase.co/storage/v1/object/public/models/hot-dog/model.gltf', scale: 3, shape: 'pizza' }, // Used hot-dog as a temporary substitution
     category: 'pizzas',
     addOns: withAddons([{ id: 'stuffed-crust', label: 'Stuffed Crust', price: 2.5 }]),
   },
@@ -76,7 +72,6 @@ export const MENU_ITEMS = [
     specs: { calories: 980, prepTime: '16 min', size: '12 inch' },
     price: 14.9,
     image: 'https://www.freepnglogos.com/uploads/pizza-png/pizza-transparent-images-11.png',
-    model: { url: 'https://vazxmixizvqrz.supabase.co/storage/v1/object/public/models/hot-dog/model.gltf', scale: 3, shape: 'pizza' },
     category: 'pizzas',
     addOns: withAddons([{ id: 'burrata', label: 'Fresh Burrata', price: 3.0 }]),
   },
@@ -88,7 +83,6 @@ export const MENU_ITEMS = [
     specs: { calories: 520, prepTime: '8 min', size: 'Sharing basket' },
     price: 7.25,
     image: 'https://www.freepnglogos.com/uploads/french-fries-png/french-fries-png-image-download-7.png',
-    model: { url: 'https://vazxmixizvqrz.supabase.co/storage/v1/object/public/models/hot-dog/model.gltf', scale: 3, shape: 'fries' },
     category: 'sides',
     addOns: [...SAUCE_ADDONS, { id: 'parmesan', label: 'Extra Parmesan', price: 1.2 }],
   },
@@ -100,7 +94,6 @@ export const MENU_ITEMS = [
     specs: { calories: 610, prepTime: '9 min', size: 'Footlong' },
     price: 8.5,
     image: 'https://www.freepnglogos.com/uploads/hot-dog-png/hot-dog-png-transparent-images-12.png',
-    model: { url: 'https://vazxmixizvqrz.supabase.co/storage/v1/object/public/models/hot-dog/model.gltf', scale: 3, shape: 'fries' },
     category: 'sides',
     addOns: [...SAUCE_ADDONS, CHEESE_ADDON],
   },
@@ -112,7 +105,6 @@ export const MENU_ITEMS = [
     specs: { calories: 640, prepTime: '5 min', size: '500 ml' },
     price: 6.75,
     image: 'https://www.freepnglogos.com/uploads/drinks-png/drinks-transparent-png-pictures-icons-and-png-2.png',
-    model: { url: 'https://vazxmixizvqrz.supabase.co/storage/v1/object/public/models/cup-tea/model.gltf', scale: 1.2, shape: 'drink' },
     category: 'drinks',
     addOns: [
       { id: 'whipped-cream', label: 'Extra Whipped Cream', price: 0.8 },
@@ -127,7 +119,6 @@ export const MENU_ITEMS = [
     specs: { calories: 180, prepTime: '3 min', size: '400 ml' },
     price: 3.9,
     image: 'https://www.freepnglogos.com/uploads/drinks-png/soft-drinks-png-download-1.png',
-    model: { url: 'https://vazxmixizvqrz.supabase.co/storage/v1/object/public/models/cup-tea/model.gltf', scale: 1, shape: 'drink' },
     category: 'drinks',
     addOns: [
       { id: 'lime', label: 'Fresh Lime', price: 0.4 },
