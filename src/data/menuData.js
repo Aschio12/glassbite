@@ -1,3 +1,15 @@
+export const CATEGORIES = [
+  { id: 'burgers', label: 'Burgers' },
+  { id: 'pizzas', label: 'Pizzas' },
+  { id: 'mains', label: 'Mains' },
+  { id: 'sides', label: 'Sides' },
+  { id: 'desserts', label: 'Desserts' },
+];
+
+export const formatPrice = (price) => {
+  return `$${price.toFixed(2)}`;
+};
+
 export const SAUCE_ADDONS = [
   { id: 'truffle-mayo', label: 'Truffle Mayo', price: 1.5 },
   { id: 'house-ember', label: 'House Ember Sauce', price: 1.0 },
