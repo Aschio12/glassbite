@@ -68,12 +68,9 @@
 @layer utilities {
   /* Deep gradient mesh background layers */
   .bg-mesh {
-    background-color: #020617;
+    background-color: #000000;
     background-image:
-      radial-gradient(at 18% 12%, rgba(249, 115, 22, 0.22) 0px, transparent 55%),
-      radial-gradient(at 82% 8%, rgba(220, 38, 38, 0.18) 0px, transparent 50%),
-      radial-gradient(at 75% 78%, rgba(251, 146, 60, 0.14) 0px, transparent 55%),
-      radial-gradient(at 12% 85%, rgba(234, 88, 12, 0.16) 0px, transparent 50%);
+      radial-gradient(circle at 50% 50%, rgba(25, 25, 25, 0.8) 0px, transparent 60%);
   }
 
   .preserve-3d {

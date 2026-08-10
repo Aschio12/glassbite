@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import CategoryFilter from './components/CategoryFilter.jsx';
-import MenuGrid from './components/MenuGrid.jsx';
+import MenuCarousel from './components/MenuCarousel.jsx';
 import ItemModal from './components/ItemModal.jsx';
 import CartDrawer from './components/CartDrawer.jsx';
 import { MENU_ITEMS } from './data/menuData.js';
@@ -102,7 +102,7 @@ export default function App() {
           </div>
 
           <CategoryFilter active={category} onChange={setCategory} />
-          <MenuGrid
+          <MenuCarousel
             items={filteredItems}
             onOpen={setSelectedItem}
             onAdd={(item) => addToCart(item)}
