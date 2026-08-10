@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { Plus } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -72,7 +72,7 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-amber-400 hover:text-black"
                 aria-label={`Add ${item.name} to cart`}
               >
-                <PlusIcon className="h-5 w-5" />
+                <Plus className="h-5 w-5" />
               </button>
             </div>
           </div>
