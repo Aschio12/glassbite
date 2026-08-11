@@ -4,6 +4,7 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
   return (
     <div className="mx-auto grid w-full max-w-[100rem] grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-20">
       {items.map((item, index) => {
+        const isDarker = index % 3 === 0;
         return (
           <div
             key={item.id}
@@ -15,7 +16,11 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
               <img
                 src={item.image}
                 alt={item.name}
-                className="relative z-10 h-full w-full object-contain animate-float transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_15px_30px_rgba(255,107,0,0.15)]"
+                className={`relative z-10 h-full w-full object-contain animate-float transition-all duration-500 group-hover:scale-110 drop-shadow-[0_15px_30px_rgba(255,107,0,0.15)] ${
+                  isDarker
+                    ? 'brightness-[0.6] contrast-125 saturate-50 group-hover:brightness-100 group-hover:contrast-100 group-hover:saturate-100'
+                    : ''
+                }`}
               />
             </div>
 
