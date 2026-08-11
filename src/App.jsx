@@ -98,8 +98,8 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="brutal-border-t bg-[#050505] py-24 text-center text-gray-500">
-        <p className="mb-4 font-display text-4xl font-black uppercase text-white">Glassbite</p>
+      <footer className="border-t border-[#222222] bg-[#050505] py-24 text-center text-gray-500">
+        <p className="mb-4 font-display text-3xl font-black uppercase text-white">GLASS<span className="text-orange-500">BITE</span></p>
         <p className="text-xs uppercase tracking-widest">© {new Date().getFullYear()} No Compromises.</p>
       </footer>
 
