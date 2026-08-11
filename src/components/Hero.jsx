@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ArrowRight } from 'lucide-react';
 
-const HERO_IMAGE = '/images/burger.png';
+const HERO_IMAGE = '/images/hero_burger.jpg';
 
 export default function Hero() {
   const sectionRef = useRef(null);
@@ -18,18 +18,18 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative flex min-h-[90vh] flex-col overflow-hidden brutal-border-b">
+    <section ref={sectionRef} className="relative flex min-h-[90vh] flex-col overflow-hidden bg-[#050505]">
       <div className="flex flex-1 flex-col lg:flex-row">
         {/* Left Typography Block */}
-        <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-12 brutal-border-r">
+        <div className="relative z-10 flex flex-1 flex-col justify-center px-6 py-12 lg:px-16">
           <div className="overflow-hidden">
             <h1 className="hero-word text-display-giant text-5xl text-white sm:text-6xl md:text-7xl lg:text-8xl">
-              JUICY.
+              DELICIOUS.
             </h1>
           </div>
           <div className="overflow-hidden">
-            <h1 className="hero-word text-display-giant text-5xl text-amber-500 sm:text-6xl md:text-7xl lg:text-8xl">
-              CHEESY.
+            <h1 className="hero-word text-display-giant text-5xl text-orange-500 sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-[0_0_15px_rgba(255,107,0,0.5)]">
+              CRAVABLE.
             </h1>
           </div>
           <div className="overflow-hidden">
@@ -38,28 +38,26 @@ export default function Hero() {
             </h1>
           </div>
 
-          <p className="hero-cta mt-8 max-w-sm text-sm font-bold uppercase tracking-widest text-gray-400">
-            Premium ingredients, wood-fired precision, and no compromises. The ultimate fast-food experience.
+          <p className="hero-cta mt-8 max-w-md text-lg text-gray-300">
+            Premium ingredients, wood-fired precision, and no compromises. The ultimate fast-food experience delivered straight to you.
           </p>
 
           <a
             href="#menu"
-            className="hero-cta mt-10 inline-flex w-fit items-center gap-4 bg-amber-500 px-8 py-4 text-sm font-black uppercase tracking-widest text-black transition-transform hover:scale-105 active:scale-95"
+            className="hero-cta mt-10 inline-flex w-fit items-center gap-4 burgerhub-button-primary px-10 py-5 text-lg"
           >
             Order Now
-            <ArrowRight className="h-5 w-5" strokeWidth={3} />
+            <ArrowRight className="h-6 w-6" strokeWidth={3} />
           </a>
         </div>
 
         {/* Right Image Block */}
-        <div className="relative flex flex-1 items-center justify-center bg-[#0a0a0a] overflow-hidden min-h-[50vh]">
+        <div className="relative flex flex-1 items-center justify-center burgerhub-radial-glow overflow-hidden min-h-[50vh]">
           <img
             src={HERO_IMAGE}
             alt="Premium Burger"
-            className="hero-img absolute inset-0 h-full w-full object-contain opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700 p-8 animate-float"
+            className="hero-img absolute inset-0 h-full w-full object-contain transition-transform duration-700 p-4 lg:p-12 animate-float drop-shadow-[0_20px_50px_rgba(255,107,0,0.2)]"
           />
-          {/* overlay vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
         </div>
       </div>
     </section>
