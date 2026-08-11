@@ -68,19 +68,19 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
         role="dialog"
         aria-modal="true"
         aria-label="Shopping cart"
-        className="absolute bottom-0 right-0 top-0 flex w-full max-w-md translate-x-full flex-col border-l-2 border-[#1a1a1a] bg-[#050505] will-change-transform"
+        className="absolute bottom-0 right-0 top-0 flex w-full max-w-md translate-x-full flex-col border-l-2 border-[#222222] bg-[#111111] will-change-transform"
         style={{ transform: 'translateX(110%)' }}
       >
-        <div className="flex items-center justify-between border-b-2 border-[#1a1a1a] px-6 py-6">
+        <div className="flex items-center justify-between border-b-2 border-[#222222] px-6 py-6">
           <h2 className="flex items-center gap-3 font-display text-3xl font-black uppercase text-white tracking-tight">
-            <ShoppingBag className="h-6 w-6 text-amber-500" strokeWidth={2.5} />
+            <ShoppingBag className="h-6 w-6 text-orange-500" strokeWidth={2.5} />
             Your Order
           </h2>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close cart"
-            className="grid h-12 w-12 place-items-center bg-black border border-[#1a1a1a] text-white transition-colors hover:bg-amber-500 hover:text-black hover:border-amber-500"
+            className="grid h-12 w-12 place-items-center bg-black border border-[#222222] text-white transition-colors hover:bg-orange-500 hover:text-black hover:border-orange-500"
           >
             <X className="h-6 w-6" strokeWidth={2.5} />
           </button>
@@ -90,7 +90,7 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
         <div className="flex-1 overflow-y-auto px-6 py-6">
           {cart.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
-              <ShoppingBag className="h-16 w-16 text-[#1a1a1a]" strokeWidth={1} />
+              <ShoppingBag className="h-16 w-16 text-[#222222]" strokeWidth={1} />
               <p className="font-display text-2xl font-black uppercase text-gray-400 tracking-widest">
                 Cart is empty
               </p>
@@ -106,14 +106,14 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
                       if (el) rowRefs.current.set(entry.key, el);
                       else rowRefs.current.delete(entry.key);
                     }}
-                    className="overflow-hidden border border-[#1a1a1a] bg-black p-4"
+                    className="overflow-hidden border border-[#222222] bg-black p-4"
                   >
                     <div className="flex gap-4">
-                      <div className="h-20 w-20 shrink-0 border border-[#1a1a1a] bg-[#050505] p-1">
+                      <div className="h-20 w-20 shrink-0 border border-[#222222] bg-[#111111] p-1">
                         <img
                           src={entry.item.image}
                           alt={entry.item.title}
-                          className="h-full w-full object-cover grayscale"
+                          className="h-full w-full object-cover"
                         />
                       </div>
                       <div className="min-w-0 flex-1 flex flex-col justify-between">
@@ -123,7 +123,7 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
                             type="button"
                             onClick={() => handleRemove(entry.key)}
                             aria-label={`Remove ${entry.item.title}`}
-                            className="text-gray-500 transition-colors hover:text-amber-500"
+                            className="text-gray-500 transition-colors hover:text-orange-500"
                           >
                             <Trash2 className="h-5 w-5" />
                           </button>
@@ -134,12 +134,12 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
                           </p>
                         )}
                         <div className="mt-4 flex items-center justify-between">
-                          <div className="flex items-center border border-[#1a1a1a]">
+                          <div className="flex items-center border border-[#222222]">
                             <button
                               type="button"
                               aria-label="Decrease quantity"
                               onClick={() => onUpdateQty(entry.key, entry.quantity - 1)}
-                              className="grid h-8 w-8 place-items-center bg-black text-white transition-colors hover:bg-amber-500 hover:text-black"
+                              className="grid h-8 w-8 place-items-center bg-black text-white transition-colors hover:bg-orange-500 hover:text-black"
                             >
                               <Minus className="h-4 w-4" strokeWidth={2.5} />
                             </button>
@@ -150,12 +150,12 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
                               type="button"
                               aria-label="Increase quantity"
                               onClick={() => onUpdateQty(entry.key, entry.quantity + 1)}
-                              className="grid h-8 w-8 place-items-center bg-black text-white transition-colors hover:bg-amber-500 hover:text-black"
+                              className="grid h-8 w-8 place-items-center bg-black text-white transition-colors hover:bg-orange-500 hover:text-black"
                             >
                               <Plus className="h-4 w-4" strokeWidth={2.5} />
                             </button>
                           </div>
-                          <span className="font-display text-xl font-black text-amber-500">
+                          <span className="font-display text-xl font-black text-orange-500">
                             {formatPrice(lineTotal)}
                           </span>
                         </div>
@@ -170,7 +170,7 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
 
         {/* Totals */}
         {cart.length > 0 && (
-          <div className="border-t-2 border-[#1a1a1a] bg-[#050505] px-6 py-6">
+          <div className="border-t-2 border-[#222222] bg-[#111111] px-6 py-6">
             <dl className="space-y-2 text-sm font-bold uppercase tracking-widest text-gray-400">
               <div className="flex justify-between">
                 <dt>Subtotal</dt>
@@ -180,16 +180,16 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
                 <dt>Tax (8%)</dt>
                 <dd className="text-white">{formatPrice(tax)}</dd>
               </div>
-              <div className="my-4 border-t border-[#1a1a1a]" />
+              <div className="my-4 border-t border-[#222222]" />
               <div className="flex justify-between font-display text-2xl font-black text-white">
                 <dt>Total</dt>
-                <dd className="text-amber-500">{formatPrice(total)}</dd>
+                <dd className="text-orange-500">{formatPrice(total)}</dd>
               </div>
             </dl>
             <button
               type="button"
               onClick={onCheckout}
-              className="mt-6 flex h-14 w-full items-center justify-center bg-white font-display text-xl font-black uppercase tracking-tight text-black transition-colors hover:bg-amber-500"
+              className="mt-6 flex h-14 w-full items-center justify-center bg-white font-display text-xl font-black uppercase tracking-tight text-black transition-colors hover:bg-orange-500"
             >
               Checkout — {formatPrice(total)}
             </button>

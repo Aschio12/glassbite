@@ -44,26 +44,26 @@ export default function ItemModal({ item, onClose, onAdd }) {
       aria-label={item.title}
     >
       <div
-        className="relative flex max-h-full w-full max-w-5xl flex-col md:flex-row overflow-y-auto border-2 border-[#1a1a1a] bg-[#050505]"
+        className="relative flex max-h-full w-full max-w-5xl flex-col md:flex-row overflow-y-auto border-2 border-[#222222] bg-[#111111]"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
           onClick={onClose}
           aria-label="Close details"
-          className="absolute right-4 top-4 z-10 grid h-12 w-12 place-items-center bg-black border border-[#1a1a1a] text-white transition-colors hover:bg-amber-500 hover:text-black hover:border-amber-500"
+          className="absolute right-4 top-4 z-10 grid h-12 w-12 place-items-center bg-black border border-[#222222] text-white transition-colors hover:bg-orange-500 hover:text-black hover:border-orange-500"
         >
           <X className="h-6 w-6" strokeWidth={2.5} />
         </button>
 
         {/* Visual side */}
-        <div className="relative aspect-square w-full md:w-1/2 bg-black border-b md:border-b-0 md:border-r border-[#1a1a1a]">
+        <div className="relative aspect-square w-full md:w-1/2 bg-black border-b md:border-b-0 md:border-r border-[#222222]">
           <img
             src={item.image}
             alt={item.name}
             className="absolute inset-0 h-full w-full object-cover opacity-90"
           />
-          <div className="absolute left-6 top-6 bg-amber-500 px-4 py-2 font-display text-xl font-black uppercase text-black">
+          <div className="absolute left-6 top-6 bg-orange-500 px-4 py-2 font-display text-xl font-black uppercase text-black">
             {item.category}
           </div>
         </div>
@@ -80,13 +80,13 @@ export default function ItemModal({ item, onClose, onAdd }) {
           </div>
 
           <div className="mb-8 flex flex-wrap gap-4 text-xs font-bold uppercase tracking-widest text-gray-500">
-            <span className="border border-[#1a1a1a] px-3 py-2">
+            <span className="border border-[#222222] px-3 py-2">
               {item.specs.calories} kcal
             </span>
-            <span className="border border-[#1a1a1a] px-3 py-2">
+            <span className="border border-[#222222] px-3 py-2">
               {item.specs.prepTime}
             </span>
-            <span className="border border-[#1a1a1a] px-3 py-2">
+            <span className="border border-[#222222] px-3 py-2">
               {item.specs.size}
             </span>
           </div>
@@ -94,7 +94,7 @@ export default function ItemModal({ item, onClose, onAdd }) {
           {/* Add-ons */}
           {item.addOns && item.addOns.length > 0 && (
             <div className="mb-8">
-              <p className="mb-4 text-sm font-black uppercase tracking-widest text-amber-500">
+              <p className="mb-4 text-sm font-black uppercase tracking-widest text-orange-500">
                 Customizations
               </p>
               <div className="space-y-3">
@@ -105,12 +105,12 @@ export default function ItemModal({ item, onClose, onAdd }) {
                       key={addOn.id}
                       className={`flex cursor-pointer items-center justify-between border px-4 py-3 text-sm uppercase transition-all duration-200 ${
                         checked
-                          ? 'border-amber-500 bg-amber-500/10 text-amber-500'
-                          : 'border-[#1a1a1a] bg-black hover:border-gray-600 text-gray-400 hover:text-white'
+                          ? 'border-orange-500 bg-orange-500/10 text-orange-500'
+                          : 'border-[#222222] bg-black hover:border-gray-600 text-gray-400 hover:text-white'
                       }`}
                     >
                       <span className="flex items-center gap-4 font-bold">
-                        <div className={`grid h-5 w-5 place-items-center border ${checked ? 'border-amber-500 bg-amber-500' : 'border-[#1a1a1a] bg-transparent'}`}>
+                        <div className={`grid h-5 w-5 place-items-center border ${checked ? 'border-orange-500 bg-orange-500' : 'border-[#222222] bg-transparent'}`}>
                           {checked && <div className="h-2 w-2 bg-black" />}
                         </div>
                         {addOn.label}
@@ -127,12 +127,12 @@ export default function ItemModal({ item, onClose, onAdd }) {
 
           {/* Quantity + total */}
           <div className="mt-auto flex flex-col sm:flex-row items-center gap-4 pt-8">
-            <div className="flex h-16 w-full sm:w-auto items-center justify-between border border-[#1a1a1a] bg-black px-4">
+            <div className="flex h-16 w-full sm:w-auto items-center justify-between border border-[#222222] bg-black px-4">
               <button
                 type="button"
                 aria-label="Decrease quantity"
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                className="grid h-8 w-8 place-items-center text-gray-500 transition-colors hover:text-amber-500"
+                className="grid h-8 w-8 place-items-center text-gray-500 transition-colors hover:text-orange-500"
               >
                 <Minus className="h-5 w-5" />
               </button>
@@ -141,7 +141,7 @@ export default function ItemModal({ item, onClose, onAdd }) {
                 type="button"
                 aria-label="Increase quantity"
                 onClick={() => setQuantity((q) => Math.min(20, q + 1))}
-                className="grid h-8 w-8 place-items-center text-gray-500 transition-colors hover:text-amber-500"
+                className="grid h-8 w-8 place-items-center text-gray-500 transition-colors hover:text-orange-500"
               >
                 <Plus className="h-5 w-5" />
               </button>
@@ -150,7 +150,7 @@ export default function ItemModal({ item, onClose, onAdd }) {
             <button
               type="button"
               onClick={handleAdd}
-              className="flex h-16 flex-1 w-full items-center justify-center bg-white px-6 font-display text-xl font-black uppercase text-black transition-colors hover:bg-amber-500"
+              className="flex h-16 flex-1 w-full items-center justify-center bg-white px-6 font-display text-xl font-black uppercase text-black transition-colors hover:bg-orange-500"
             >
               Add to Cart — {formatPrice(total)}
             </button>
