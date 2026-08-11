@@ -100,12 +100,12 @@ export default function ItemModal({ item, onClose, onAdd }) {
                 <img
                   key={i}
                   src={item.image}
-                  alt={i === layers.length - 1 ? item.title : ''}
+                  alt={i === layers.length - 1 ? item.name : ''}
                   aria-hidden={i !== layers.length - 1}
                   data-depth={layer.depth}
                   data-scale={layer.scale}
                   data-opacity={layer.opacity}
-                  className={`depth-layer absolute inset-0 h-full w-full rounded-3xl border border-white/20 object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] shadow-2xl will-change-transform ${layer.blur}`}
+                  className={`depth-layer absolute inset-0 h-full w-full rounded-full border border-[#1a1a1a]/50 object-cover drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] shadow-2xl will-change-transform ${layer.blur}`}
                 />
               ))}
             </div>

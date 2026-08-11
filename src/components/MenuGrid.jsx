@@ -33,12 +33,14 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
           className="group relative flex flex-col overflow-visible cursor-pointer transition-all duration-500 hover:-translate-y-4"
           onClick={() => onOpen(item)}
         >
-          <div className="relative h-64 sm:h-80 w-full overflow-hidden flex items-center justify-center p-4">
-            <img
-              src={item.image}
-              alt={item.name}
-              className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl"
-            />
+          <div className="relative h-64 sm:h-72 w-full overflow-hidden flex items-center justify-center p-4">
+            <div className="relative h-48 w-48 sm:h-56 sm:w-56 rounded-full overflow-hidden drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] shadow-[0_0_15px_rgba(255,255,255,0.05)] border-4 border-[#1a1a1a]">
+              <img
+                src={item.image}
+                alt={item.name}
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
+              />
+            </div>
           </div>
 
           {/* Content */}
