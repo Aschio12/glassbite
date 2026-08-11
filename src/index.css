@@ -32,25 +32,25 @@
 }
 
 @layer components {
-  /* Brutalist Wireframe Surface */
-  .brutal-panel {
-    @apply bg-[#0a0a0a] border border-[#1a1a1a];
+  /* BurgerHub Vibrant Cards */
+  .burgerhub-card {
+    @apply bg-[#111111] border border-[#222222] rounded-3xl overflow-hidden transition-all duration-300;
   }
 
-  .brutal-border-b {
-    @apply border-b border-[#1a1a1a];
-  }
-  
-  .brutal-border-r {
-    @apply border-r border-[#1a1a1a];
+  .burgerhub-card:hover {
+    @apply border-orange-500/50 shadow-[0_0_30px_rgba(255,107,0,0.15)];
   }
 
-  .brutal-border-l {
-    @apply border-l border-[#1a1a1a];
+  .burgerhub-button-primary {
+    @apply bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-full transition-transform hover:scale-105 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.3)];
   }
-  
-  .brutal-border-t {
-    @apply border-t border-[#1a1a1a];
+
+  .burgerhub-button-secondary {
+    @apply bg-transparent border border-orange-500/30 text-orange-400 font-bold rounded-full transition-colors hover:bg-orange-500/10;
+  }
+
+  .burgerhub-radial-glow {
+    background: radial-gradient(circle at center, rgba(255, 107, 0, 0.15) 0%, transparent 70%);
   }
 
   /* Massive display text */
