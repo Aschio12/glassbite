@@ -23,17 +23,17 @@ export default function Hero() {
         {/* Left Typography Block */}
         <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-12 brutal-border-r">
           <div className="overflow-hidden">
-            <h1 className="hero-word text-display-giant text-7xl text-white sm:text-8xl md:text-[8rem] lg:text-[10rem]">
+            <h1 className="hero-word text-display-giant text-5xl text-white sm:text-6xl md:text-7xl lg:text-8xl">
               JUICY.
             </h1>
           </div>
           <div className="overflow-hidden">
-            <h1 className="hero-word text-display-giant text-7xl text-amber-500 sm:text-8xl md:text-[8rem] lg:text-[10rem]">
+            <h1 className="hero-word text-display-giant text-5xl text-amber-500 sm:text-6xl md:text-7xl lg:text-8xl">
               CHEESY.
             </h1>
           </div>
           <div className="overflow-hidden">
-            <h1 className="hero-word text-display-giant text-7xl text-white sm:text-8xl md:text-[8rem] lg:text-[10rem]">
+            <h1 className="hero-word text-display-giant text-5xl text-white sm:text-6xl md:text-7xl lg:text-8xl">
               BETTER.
             </h1>
           </div>
@@ -56,7 +56,7 @@ export default function Hero() {
           <img
             src={HERO_IMAGE}
             alt="Premium Burger"
-            className="hero-img absolute inset-0 h-full w-full object-contain opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700 p-8"
+            className="hero-img absolute inset-0 h-full w-full object-contain opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700 p-8 animate-float"
           />
           {/* overlay vignette */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
