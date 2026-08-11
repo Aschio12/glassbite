@@ -1,79 +1,55 @@
-import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { type: 'spring', stiffness: 60, damping: 15 } 
-  },
-};
 
 export default function MenuGrid({ items, onOpen, onAdd }) {
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-16 pt-8"
-    >
+    <div className="mx-auto grid w-full max-w-[100rem] grid-cols-1 border-t border-l border-[#1a1a1a] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {items.map((item) => (
-        <motion.div
+        <div
           key={item.id}
-          variants={itemVariants}
-          className="group relative flex flex-col overflow-visible cursor-pointer transition-all duration-500 hover:-translate-y-4"
+          className="group relative flex cursor-pointer flex-col border-b border-r border-[#1a1a1a] bg-[#050505] transition-colors duration-300 hover:bg-[#0a0a0a]"
           onClick={() => onOpen(item)}
         >
-          <div className="relative h-64 sm:h-72 w-full overflow-hidden flex items-center justify-center p-4">
-            <div className="relative h-48 w-48 sm:h-56 sm:w-56 rounded-full overflow-hidden drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] shadow-[0_0_15px_rgba(255,255,255,0.05)] border-4 border-[#1a1a1a]">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
-              />
+          {/* Edge to edge Image with brutalist hover effect */}
+          <div className="relative aspect-[4/3] w-full overflow-hidden bg-black">
+            <img
+              src={item.image}
+              alt={item.name}
+              className="absolute inset-0 h-full w-full object-cover opacity-70 grayscale transition-all duration-500 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0"
+            />
+            <div className="absolute right-4 top-4 bg-amber-500 px-3 py-1 font-display text-lg font-black text-black">
+              ${item.price.toFixed(2)}
             </div>
           </div>
 
-          {/* Content */}
-          <div className="flex flex-1 flex-col p-6">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h3 className="font-display text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors drop-shadow-md">
-                  {item.name}
-                </h3>
-              </div>
-              <p className="font-mono text-lg font-bold text-white shrink-0">
-                ${item.price.toFixed(2)}
+          {/* Stark Typography Content */}
+          <div className="flex flex-1 flex-col justify-between p-6">
+            <div>
+              <h3 className="font-display text-3xl uppercase leading-none tracking-tight text-white group-hover:text-amber-500 transition-colors">
+                {item.name}
+              </h3>
+              <p className="mt-4 text-xs font-bold uppercase tracking-widest text-gray-500">
+                {item.category} • {item.specs?.size || 'Standard'}
               </p>
             </div>
 
-            <div className="mt-auto pt-6 flex items-center justify-between">
-              <span className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                {item.specs?.size}
+            <div className="mt-8 flex items-center justify-between">
+              <span className="text-xs font-black uppercase text-gray-400 group-hover:text-white transition-colors">
+                View Details
               </span>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onAdd(item);
                 }}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-emerald-400 hover:text-black border border-white/20"
+                className="flex h-12 w-12 items-center justify-center border border-[#1a1a1a] bg-black text-white transition-colors hover:bg-amber-500 hover:text-black hover:border-amber-500"
                 aria-label={`Add ${item.name} to cart`}
               >
-                <Plus className="h-5 w-5" />
+                <Plus className="h-6 w-6" strokeWidth={2.5} />
               </button>
             </div>
           </div>
-        </motion.div>
+        </div>
       ))}
-    </motion.div>
+    </div>
   );
 }
