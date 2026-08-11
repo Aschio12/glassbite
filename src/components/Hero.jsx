@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ArrowRight } from 'lucide-react';
 
-const HERO_IMAGE = 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=2000&auto=format&fit=crop';
+const HERO_IMAGE = '/images/burger.png';
 
 export default function Hero() {
   const sectionRef = useRef(null);
@@ -56,7 +56,7 @@ export default function Hero() {
           <img
             src={HERO_IMAGE}
             alt="Premium Burger"
-            className="hero-img absolute inset-0 h-full w-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700"
+            className="hero-img absolute inset-0 h-full w-full object-contain opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700 p-8"
           />
           {/* overlay vignette */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />

@@ -6,7 +6,6 @@ import CategoryFilter from './components/CategoryFilter.jsx';
 import MenuGrid from './components/MenuGrid.jsx';
 import ItemModal from './components/ItemModal.jsx';
 import CartDrawer from './components/CartDrawer.jsx';
-import Marquee from './components/Marquee.jsx';
 import { MENU_ITEMS } from './data/menuData.js';
 
 const lineKey = (item, addOns) =>
@@ -88,9 +87,8 @@ export default function App() {
 
       <main className="pt-20">
         <Hero />
-        <Marquee />
 
-        <section id="menu" className="w-full pb-32">
+        <section id="menu" className="w-full pb-32 pt-12">
           <CategoryFilter active={category} onChange={setCategory} />
           <MenuGrid
             items={filteredItems}
