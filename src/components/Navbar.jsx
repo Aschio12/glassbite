@@ -2,9 +2,6 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ShoppingBag } from 'lucide-react';
 
-/**
- * Brutalist full-width header with a stark minimalist aesthetic.
- */
 export default function Navbar({ cartCount, onCartOpen }) {
   const badgeRef = useRef(null);
   const prevCount = useRef(cartCount);
@@ -37,11 +34,11 @@ export default function Navbar({ cartCount, onCartOpen }) {
   }, [cartCount]);
 
   return (
-    <header className="nav-shell fixed inset-x-0 top-0 z-40 bg-[#050505] brutal-border-b">
+    <header className="nav-shell fixed inset-x-0 top-0 z-40 bg-[#111111]/95 backdrop-blur-md border-b border-[#222222] shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
         <a href="#top" className="flex items-center gap-2">
           <span className="text-display-giant text-3xl tracking-normal text-white">
-            GLASS<span className="text-amber-500">BITE</span>
+            GLASS<span className="text-orange-500 drop-shadow-[0_0_10px_rgba(255,107,0,0.5)]">BITE</span>
           </span>
         </a>
 
@@ -61,14 +58,14 @@ export default function Navbar({ cartCount, onCartOpen }) {
           type="button"
           onClick={onCartOpen}
           aria-label={`Open cart, ${cartCount} items`}
-          className="group relative flex items-center gap-3 px-2 py-1 transition-colors hover:text-amber-500"
+          className="group relative flex items-center gap-3 px-2 py-1 transition-colors hover:text-orange-500"
         >
-          <span className="text-xs font-bold uppercase tracking-widest hidden sm:inline">Bag</span>
+          <span className="text-xs font-bold uppercase tracking-widest hidden sm:inline text-white group-hover:text-orange-500 transition-colors">Bag</span>
           <div className="relative">
-            <ShoppingBag className="h-5 w-5" strokeWidth={1.5} />
+            <ShoppingBag className="h-5 w-5 text-white group-hover:text-orange-500 transition-colors" strokeWidth={1.5} />
             <span
               ref={badgeRef}
-              className="absolute -right-2 -top-2 grid h-4 min-w-4 place-items-center bg-amber-500 px-1 text-[10px] font-black text-black will-change-transform"
+              className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-orange-500 px-1 text-[10px] font-black text-white will-change-transform shadow-[0_0_10px_rgba(255,107,0,0.5)]"
             >
               {cartCount}
             </span>
