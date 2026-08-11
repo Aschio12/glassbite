@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import CategoryFilter from './components/CategoryFilter.jsx';
@@ -90,20 +90,7 @@ export default function App() {
         <Hero />
         <Marquee />
 
-        <section id="menu" className="mx-auto w-[min(92%,72rem)] px-2 pb-32">
-          <motion.div className="mb-6 flex flex-col items-center text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-400">
-              A Taste of Luxury
-            </p>
-            <h1 className="font-display mt-3 text-5xl font-black leading-[1.1] tracking-tight sm:text-7xl">
-              Served on <span className="text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]">Glass</span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-200 sm:text-xl drop-shadow-md">
-              Every dish floats on its own glass pedestal. Hover to feel it,
-              tap to build it your way.
-            </p>
-          </motion.div>
-
+        <section id="menu" className="w-full pb-32">
           <CategoryFilter active={category} onChange={setCategory} />
           <MenuGrid
             items={filteredItems}
@@ -113,9 +100,9 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10 bg-black/40 backdrop-blur-md py-12 text-center text-slate-400">
-        <p className="mb-4 font-display text-2xl font-bold text-white">Glassbite</p>
-        <p className="text-sm">Experience the taste of luxury.</p>
+      <footer className="brutal-border-t bg-[#050505] py-24 text-center text-gray-500">
+        <p className="mb-4 font-display text-4xl font-black uppercase text-white">Glassbite</p>
+        <p className="text-xs uppercase tracking-widest">© {new Date().getFullYear()} No Compromises.</p>
       </footer>
 
       {selectedItem && (
