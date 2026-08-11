@@ -17,10 +17,10 @@ export default function CategoryFilter({ active, onChange }) {
             aria-selected={isActive}
             data-category={cat.id}
             onClick={() => onChange(cat.id)}
-            className={`font-display text-2xl uppercase tracking-wider transition-colors duration-200 md:text-4xl ${
+            className={`font-display text-2xl uppercase tracking-wider transition-all duration-300 md:text-4xl ${
               isActive
-                ? 'text-amber-500 underline decoration-amber-500 decoration-4 underline-offset-8'
-                : 'text-gray-600 hover:text-white'
+                ? 'text-orange-500 underline decoration-orange-500 decoration-4 underline-offset-8 drop-shadow-[0_0_10px_rgba(255,107,0,0.5)]'
+                : 'text-gray-500 hover:text-white'
             }`}
           >
             {cat.label}
