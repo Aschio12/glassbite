@@ -6,6 +6,7 @@ import CategoryFilter from './components/CategoryFilter.jsx';
 import MenuGrid from './components/MenuGrid.jsx';
 import ItemModal from './components/ItemModal.jsx';
 import CartDrawer from './components/CartDrawer.jsx';
+import Marquee from './components/Marquee.jsx';
 import { MENU_ITEMS } from './data/menuData.js';
 
 const lineKey = (item, addOns) =>
@@ -85,8 +86,9 @@ export default function App() {
     <div className="relative min-h-screen">
       <Navbar cartCount={cartCount} onCartOpen={() => setCartOpen(true)} />
 
-      <main>
+      <main className="pt-20">
         <Hero />
+        <Marquee />
 
         <section id="menu" className="mx-auto w-[min(92%,72rem)] px-2 pb-32">
           <motion.div className="mb-6 flex flex-col items-center text-center">
