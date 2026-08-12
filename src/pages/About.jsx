@@ -123,6 +123,40 @@ export default function About() {
         </div>
       </div>
 
+      {/* Chefs Section */}
+      <div className="w-full bg-black/50 py-32 border-y border-white/5 relative z-10">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center mb-16">
+            <h2 className="about-reveal text-3xl md:text-5xl font-display font-bold uppercase tracking-tighter text-white">The Masters</h2>
+            <div className="w-16 h-1 bg-orange-500 mx-auto mt-6 rounded-full" />
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="about-reveal group">
+              <div className="w-full aspect-[4/5] bg-white/5 rounded-3xl mb-6 overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
+                <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" />
+                <div className="absolute bottom-6 left-6 z-20">
+                  <h3 className="text-3xl font-display font-black text-white uppercase">Chef Marcus</h3>
+                  <p className="text-orange-500 font-bold tracking-widest text-sm">HEAD CHEF</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="about-reveal group">
+              <div className="w-full aspect-[4/5] bg-white/5 rounded-3xl mb-6 overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
+                <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" />
+                <div className="absolute bottom-6 left-6 z-20">
+                  <h3 className="text-3xl font-display font-black text-white uppercase">Chef Elena</h3>
+                  <p className="text-orange-500 font-bold tracking-widest text-sm">PASTRY & DESSERTS</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* CTA Section */}
       <div className="w-full max-w-4xl mx-auto px-6 pb-32 text-center">
         <div className="about-reveal bg-gradient-to-tr from-orange-900/40 to-black border border-orange-500/20 p-12 rounded-[3rem] relative overflow-hidden">
