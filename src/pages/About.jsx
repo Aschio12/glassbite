@@ -75,6 +75,32 @@ export default function About() {
           </h2>
         </div>
       </div>
+
+      {/* The Process Section */}
+      <div className="mx-auto max-w-5xl px-6 py-32 w-full">
+        <div className="text-center mb-16">
+          <h2 className="about-reveal text-3xl md:text-5xl font-display font-bold uppercase tracking-tighter text-white">Our Process</h2>
+          <div className="w-16 h-1 bg-orange-500 mx-auto mt-6 rounded-full" />
+        </div>
+
+        <div className="space-y-12">
+          {['The Sourcing', 'The Preparation', 'The Experience'].map((step, i) => (
+            <div key={i} className="about-reveal flex flex-col md:flex-row gap-8 items-center bg-white/[0.01] border border-white/5 p-8 rounded-3xl hover:bg-white/[0.03] transition-colors">
+              <div className="w-20 h-20 shrink-0 rounded-2xl bg-gradient-to-br from-orange-600 to-amber-500 flex items-center justify-center text-3xl font-black text-white shadow-[0_0_30px_rgba(255,107,0,0.3)]">
+                0{i + 1}
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-3">{step}</h3>
+                <p className="text-gray-400 leading-relaxed">
+                  {i === 0 && "We travel the world to find the highest quality ingredients. From locally sourced organic produce to premium wagyu beef, we never settle for second best."}
+                  {i === 1 && "Every dish is prepared to order. Our chefs use advanced culinary techniques to ensure maximum flavor extraction and perfect textures in every single bite."}
+                  {i === 2 && "The moment our food hits your table, it's a sensory journey. The aroma, the visual presentation, and the explosive flavors combine into pure magic."}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
