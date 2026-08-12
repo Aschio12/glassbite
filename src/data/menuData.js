@@ -6,7 +6,7 @@ export const CATEGORIES = [
   { id: 'sides', label: 'Sides' },
   { id: 'desserts', label: 'Desserts' },
   { id: 'drinks', label: 'Drinks' },
-,
+];
 
 export const formatPrice = (price) => `$${price.toFixed(2)}`;
 
@@ -16,10 +16,10 @@ export const SAUCE_ADDONS = [
   { id: 'truffle-mayo', label: 'Truffle Mayo', price: 1.5 },
   { id: 'house-ember', label: 'House Ember Sauce', price: 1.0 },
   { id: 'garlic-aioli', label: 'Roast Garlic Aioli', price: 1.0 },
-,
+];
 
 export const CHEESE_ADDON = { id: 'extra-cheese', label: 'Extra Cheese', price: 1.5 };
-const withAddons = (specificAddons = []) => [...specificAddons, ...SAUCE_ADDONS, CHEESE_ADDON,
+const withAddons = (specificAddons = []) => [...specificAddons, ...SAUCE_ADDONS, CHEESE_ADDON];
 
 export const MENU_ITEMS = [
   {
@@ -142,7 +142,6 @@ export const MENU_ITEMS = [
     category: 'drinks',
     addOns: [],
   },
-,
 
   {
     id: 'iced-coffee',
@@ -191,6 +190,27 @@ export const MENU_ITEMS = [
     specs: { calories: 580, prepTime: '3 min', size: 'Slice' },
     price: 9.5,
     image: '/images/dessert_cheesecake_v3.png',
+    category: 'desserts',
+    addOns: [],
+  }
+,
+  {
+    id: 'tiramisu',
+    name: 'Classic Tiramisu',
+    description: 'Italian dessert with espresso-soaked ladyfingers and mascarpone.',
+    specs: { calories: 510, prepTime: '3 min', size: 'Slice' },
+    price: 8.5,
+    image: '/images/dessert_tiramisu_v3.png',
+    category: 'desserts',
+    addOns: [],
+  },
+  {
+    id: 'brownie-sundae',
+    name: 'Brownie Sundae',
+    description: 'Warm chocolate brownie topped with ice cream, whipped cream, and a cherry.',
+    specs: { calories: 890, prepTime: '5 min', size: 'Large Glass' },
+    price: 11.0,
+    image: '/images/dessert_sundae_v3.png',
     category: 'desserts',
     addOns: [],
   }
