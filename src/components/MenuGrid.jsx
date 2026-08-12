@@ -1,4 +1,4 @@
-import { Plus } from 'lucide-react';
+import { Plus, ShoppingCart } from 'lucide-react';
 
 export default function MenuGrid({ items, onOpen, onAdd }) {
   return (
@@ -44,11 +44,10 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
                     e.stopPropagation();
                     onAdd(item);
                   }}
-                  className="flex h-12 w-full max-w-[200px] items-center justify-center burgerhub-button-primary"
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 text-white/70 transition-all hover:bg-white/10 hover:text-white"
                   aria-label={`Add ${item.name} to cart`}
                 >
-                  <span className="font-bold uppercase tracking-wider mr-2">Add to Order</span>
-                  <Plus className="h-5 w-5" strokeWidth={3} />
+                  <ShoppingCart className="h-5 w-5" strokeWidth={2.5} />
                 </button>
               </div>
             </div>
