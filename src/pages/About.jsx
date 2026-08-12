@@ -101,6 +101,22 @@ export default function About() {
           ))}
         </div>
       </div>
+
+      {/* CTA Section */}
+      <div className="w-full max-w-4xl mx-auto px-6 pb-32 text-center">
+        <div className="about-reveal bg-gradient-to-tr from-orange-900/40 to-black border border-orange-500/20 p-12 rounded-[3rem] relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/images/hero_burger.jpg')] bg-cover opacity-10 mix-blend-overlay" />
+          <h2 className="text-3xl md:text-5xl font-display font-black text-white mb-6 relative z-10">
+            Ready to <span className="text-orange-500">Bite?</span>
+          </h2>
+          <p className="text-gray-300 mb-8 relative z-10 max-w-lg mx-auto">
+            Join us at our flagship location in Addis Ababa and experience the future of premium dining.
+          </p>
+          <a href="/menu" className="burgerhub-button-primary inline-flex items-center gap-2 relative z-10">
+            EXPLORE THE MENU
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
