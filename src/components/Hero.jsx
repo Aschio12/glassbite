@@ -23,23 +23,23 @@ export default function Hero() {
         {/* Left Typography Block */}
         <div className="relative z-10 flex flex-1 flex-col justify-center px-6 py-12 lg:px-16 lg:max-w-2xl">
           <div className="overflow-hidden">
-            <h1 className="hero-word text-display-giant text-5xl text-white sm:text-6xl md:text-7xl lg:text-8xl lowercase capitalize-first">
+            <h1 className="hero-word text-display-giant text-6xl text-white sm:text-7xl md:text-8xl lg:text-9xl lowercase capitalize-first py-2">
               Delicious.
             </h1>
           </div>
           <div className="overflow-hidden">
-            <h1 className="hero-word text-display-giant text-5xl text-orange-500 sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-[0_0_15px_rgba(255,107,0,0.5)] lowercase capitalize-first">
+            <h1 className="hero-word text-display-giant text-6xl bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent sm:text-7xl md:text-8xl lg:text-9xl drop-shadow-[0_0_15px_rgba(255,107,0,0.4)] lowercase capitalize-first py-2">
               Cravable.
             </h1>
           </div>
           <div className="overflow-hidden">
-            <h1 className="hero-word text-display-giant text-5xl text-white sm:text-6xl md:text-7xl lg:text-8xl lowercase capitalize-first">
+            <h1 className="hero-word text-display-giant text-6xl text-white sm:text-7xl md:text-8xl lg:text-9xl lowercase capitalize-first py-2">
               Better.
             </h1>
           </div>
 
-          <p className="hero-cta mt-8 max-w-md text-lg text-gray-300">
-            Premium ingredients, wood-fired precision, and no compromises. The ultimate fast-food experience delivered straight to you.
+          <p className="hero-cta mt-8 max-w-md text-lg text-gray-300 leading-relaxed">
+            Experience the ultimate culinary romance. Premium, hand-crafted burgers and wood-fired pizzas made with passion, precision, and zero compromises. Fall in love at first bite.
           </p>
 
           <a
