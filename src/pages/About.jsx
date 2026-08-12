@@ -33,7 +33,7 @@ export default function About() {
         </p>
 
         <div className="about-reveal grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 text-left">
-          <div className="group p-8 rounded-3xl bg-transparent transition-all duration-500 hover:-translate-y-2">
+          <div className="group p-8 rounded-3xl bg-transparent transition-all duration-500 hover:-translate-y-2 border border-white/0 hover:border-white/5 hover:bg-white/[0.02]">
             <div className="w-12 h-12 rounded-full bg-orange-500/10 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors">
               <div className="w-4 h-4 rounded-full bg-orange-500 shadow-[0_0_15px_rgba(255,107,0,0.8)]" />
             </div>
@@ -43,7 +43,7 @@ export default function About() {
             </p>
           </div>
           
-          <div className="group p-8 rounded-3xl bg-transparent transition-all duration-500 hover:-translate-y-2">
+          <div className="group p-8 rounded-3xl bg-transparent transition-all duration-500 hover:-translate-y-2 border border-white/0 hover:border-white/5 hover:bg-white/[0.02]">
             <div className="w-12 h-12 rounded-full bg-orange-500/10 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors">
               <div className="w-4 h-4 rounded-full bg-orange-500 shadow-[0_0_15px_rgba(255,107,0,0.8)]" />
             </div>
@@ -53,7 +53,7 @@ export default function About() {
             </p>
           </div>
           
-          <div className="group p-8 rounded-3xl bg-transparent transition-all duration-500 hover:-translate-y-2">
+          <div className="group p-8 rounded-3xl bg-transparent transition-all duration-500 hover:-translate-y-2 border border-white/0 hover:border-white/5 hover:bg-white/[0.02]">
             <div className="w-12 h-12 rounded-full bg-orange-500/10 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors">
               <div className="w-4 h-4 rounded-full bg-orange-500 shadow-[0_0_15px_rgba(255,107,0,0.8)]" />
             </div>
@@ -62,6 +62,17 @@ export default function About() {
               We never cut corners. From our custom-baked brioche buns to our perfectly seared patties.
             </p>
           </div>
+        </div>
+      </div>
+
+      {/* Parallax Image Section */}
+      <div className="w-full h-[60vh] mt-32 relative overflow-hidden flex items-center justify-center">
+        <div className="absolute inset-0 bg-[url('/images/hero_burger.jpg')] bg-cover bg-center bg-fixed opacity-30 brightness-50 saturate-0" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
+        <div className="relative z-10 text-center px-6">
+          <h2 className="text-4xl md:text-6xl font-display font-black uppercase tracking-tighter text-white drop-shadow-2xl">
+            Taste the <span className="text-orange-500">Difference</span>
+          </h2>
         </div>
       </div>
     </div>
