@@ -33,22 +33,31 @@ export default function About() {
         </p>
 
         <div className="about-reveal grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 text-left">
-          <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 backdrop-blur-md hover:bg-white/[0.04] transition-all">
-            <h3 className="text-2xl font-bold text-white mb-4">Pure Ingredients</h3>
+          <div className="group p-8 rounded-3xl bg-transparent transition-all duration-500 hover:-translate-y-2">
+            <div className="w-12 h-12 rounded-full bg-orange-500/10 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors">
+              <div className="w-4 h-4 rounded-full bg-orange-500 shadow-[0_0_15px_rgba(255,107,0,0.8)]" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-orange-400 transition-colors">Pure Ingredients</h3>
             <p className="text-gray-400 leading-relaxed">
               No artificial preservatives, colors, or flavors. Just real, honest food crafted with passion.
             </p>
           </div>
           
-          <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 backdrop-blur-md hover:bg-white/[0.04] transition-all">
-            <h3 className="text-2xl font-bold text-white mb-4">Masterfully Crafted</h3>
+          <div className="group p-8 rounded-3xl bg-transparent transition-all duration-500 hover:-translate-y-2">
+            <div className="w-12 h-12 rounded-full bg-orange-500/10 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors">
+              <div className="w-4 h-4 rounded-full bg-orange-500 shadow-[0_0_15px_rgba(255,107,0,0.8)]" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-orange-400 transition-colors">Masterfully Crafted</h3>
             <p className="text-gray-400 leading-relaxed">
               Our chefs treat every burger like a canvas, ensuring the perfect balance of texture and taste.
             </p>
           </div>
           
-          <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 backdrop-blur-md hover:bg-white/[0.04] transition-all">
-            <h3 className="text-2xl font-bold text-white mb-4">No Compromises</h3>
+          <div className="group p-8 rounded-3xl bg-transparent transition-all duration-500 hover:-translate-y-2">
+            <div className="w-12 h-12 rounded-full bg-orange-500/10 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors">
+              <div className="w-4 h-4 rounded-full bg-orange-500 shadow-[0_0_15px_rgba(255,107,0,0.8)]" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-orange-400 transition-colors">No Compromises</h3>
             <p className="text-gray-400 leading-relaxed">
               We never cut corners. From our custom-baked brioche buns to our perfectly seared patties.
             </p>
