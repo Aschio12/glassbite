@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import CartDrawer from './components/CartDrawer.jsx';
 import Home from './pages/Home.jsx';
+import About from './pages/About.jsx';
 
 const lineKey = (item, addOns) =>
   `${item.id}|${addOns
@@ -75,7 +76,7 @@ export default function App() {
       <div className="flex-1">
         <Routes>
           <Route path="/" element={<Home onAddToCart={addToCart} />} />
-          <Route path="/about" element={<div className="pt-32 text-center">About Page Placeholder</div>} />
+          <Route path="/about" element={<About />} />
           <Route path="/location" element={<div className="pt-32 text-center">Location Page Placeholder</div>} />
         </Routes>
       </div>
