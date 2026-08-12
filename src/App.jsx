@@ -6,6 +6,7 @@ import CartDrawer from './components/CartDrawer.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Location from './pages/Location.jsx';
+import Footer from './components/Footer.jsx';
 
 const lineKey = (item, addOns) =>
   `${item.id}|${addOns
@@ -82,10 +83,7 @@ export default function App() {
         </Routes>
       </div>
 
-      <footer className="border-t border-[#222222] bg-[#050505] py-24 text-center text-gray-500">
-        <p className="mb-4 font-display text-3xl font-black uppercase text-white">GLASS<span className="text-orange-500">BITE</span></p>
-        <p className="text-xs uppercase tracking-widest">© {new Date().getFullYear()} No Compromises.</p>
-      </footer>
+      <Footer />
 
       <CartDrawer
         open={cartOpen}
