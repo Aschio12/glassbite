@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -34,11 +36,11 @@
 @layer components {
   /* BurgerHub Vibrant Cards */
   .burgerhub-card {
-    @apply bg-[#111111] border border-[#222222] rounded-3xl overflow-hidden transition-all duration-300;
+    @apply bg-[#111111] border-transparent rounded-3xl overflow-hidden transition-all duration-300;
   }
 
   .burgerhub-card:hover {
-    @apply border-orange-500/50 shadow-[0_0_30px_rgba(255,107,0,0.15)];
+    @apply shadow-[0_0_30px_rgba(255,107,0,0.15)];
   }
 
   .burgerhub-button-primary {
@@ -55,7 +57,8 @@
 
   /* Massive display text */
   .text-display-giant {
-    @apply font-serif uppercase font-black leading-[1.1] tracking-normal;
+    font-family: 'Dancing Script', cursive;
+    @apply font-bold leading-[1.1] tracking-normal;
   }
 }
 
