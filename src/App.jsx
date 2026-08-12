@@ -5,6 +5,7 @@ import Navbar from './components/Navbar.jsx';
 import CartDrawer from './components/CartDrawer.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
+import Location from './pages/Location.jsx';
 
 const lineKey = (item, addOns) =>
   `${item.id}|${addOns
@@ -77,7 +78,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home onAddToCart={addToCart} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/location" element={<div className="pt-32 text-center">Location Page Placeholder</div>} />
+          <Route path="/location" element={<Location />} />
         </Routes>
       </div>
 
