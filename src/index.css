@@ -34,13 +34,13 @@
 }
 
 @layer components {
-  /* BurgerHub Vibrant Cards */
+  /* BurgerHub Vibrant Cards - Edgeless Design */
   .burgerhub-card {
-    @apply bg-gradient-to-tr from-[#111111] via-[#111111] to-orange-900/10 border-transparent rounded-3xl overflow-hidden transition-all duration-300;
+    @apply bg-transparent transition-all duration-300;
   }
 
   .burgerhub-card:hover {
-    @apply shadow-[0_0_30px_rgba(255,107,0,0.15)];
+    @apply transform;
   }
 
   .burgerhub-button-primary {
