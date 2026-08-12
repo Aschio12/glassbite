@@ -19,9 +19,9 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} className="relative flex min-h-[90vh] flex-col overflow-hidden bg-[#050505]">
-      <div className="flex flex-1 flex-col lg:flex-row">
+      <div className="mx-auto flex w-full max-w-[90rem] flex-1 flex-col lg:flex-row">
         {/* Left Typography Block */}
-        <div className="relative z-10 flex flex-1 flex-col justify-center px-6 py-12 lg:px-16">
+        <div className="relative z-10 flex flex-1 flex-col justify-center px-6 py-12 lg:px-16 lg:max-w-2xl">
           <div className="overflow-hidden">
             <h1 className="hero-word text-display-giant text-5xl text-white sm:text-6xl md:text-7xl lg:text-8xl">
               DELICIOUS.
@@ -56,7 +56,7 @@ export default function Hero() {
           <img
             src={HERO_IMAGE}
             alt="Premium Burger"
-            className="hero-img absolute inset-0 h-full w-full object-contain transition-transform duration-700 p-4 lg:p-12 animate-float drop-shadow-[0_20px_50px_rgba(255,107,0,0.2)]"
+            className="hero-img absolute inset-0 h-full w-full object-contain transition-transform duration-700 p-4 lg:p-12 animate-float mix-blend-screen drop-shadow-[0_20px_50px_rgba(255,107,0,0.2)]"
           />
         </div>
       </div>
