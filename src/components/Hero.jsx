@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ArrowRight } from 'lucide-react';
 
-const HERO_IMAGE = '/images/hero_burger.jpg';
+const HERO_IMAGE = '/images/hero_burger_transparent.png';
 
 export default function Hero() {
   const sectionRef = useRef(null);
@@ -56,7 +56,7 @@ export default function Hero() {
           <img
             src={HERO_IMAGE}
             alt="Premium Burger"
-            className="hero-img absolute inset-0 h-full w-full object-contain transition-transform duration-700 p-4 lg:p-12 animate-float mix-blend-screen drop-shadow-[0_20px_50px_rgba(255,107,0,0.2)]"
+            className="hero-img absolute inset-0 h-full w-full object-contain transition-transform duration-700 p-4 lg:p-12 animate-float drop-shadow-[0_20px_50px_rgba(255,107,0,0.2)]"
           />
         </div>
       </div>

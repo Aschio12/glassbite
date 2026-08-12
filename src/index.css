@@ -55,7 +55,7 @@
 
   /* Massive display text */
   .text-display-giant {
-    @apply font-display uppercase font-black leading-none tracking-tighter;
+    @apply font-serif uppercase font-black leading-[1.1] tracking-normal;
   }
 }
 
