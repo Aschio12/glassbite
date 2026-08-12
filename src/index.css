@@ -36,11 +36,11 @@
 @layer components {
   /* BurgerHub Vibrant Cards - Edgeless Design */
   .burgerhub-card {
-    @apply bg-transparent transition-all duration-300;
+    @apply bg-white/[0.02] border border-white/5 backdrop-blur-md rounded-3xl transition-all duration-500 hover:bg-white/[0.05] hover:border-orange-500/30 hover:shadow-[0_0_30px_rgba(255,107,0,0.15)];
   }
 
   .burgerhub-card:hover {
-    @apply transform;
+    @apply -translate-y-2;
   }
 
   .burgerhub-button-primary {
