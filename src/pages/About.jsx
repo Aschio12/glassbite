@@ -18,8 +18,10 @@ export default function About() {
 
   return (
     <div className="min-h-screen pt-32 pb-24 overflow-hidden relative flex flex-col items-center justify-center">
-      {/* Background glow */}
+      {/* Background glow and floating elements */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-[20%] left-[10%] w-32 h-32 bg-orange-600/5 blur-[50px] rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[10%] w-48 h-48 bg-amber-500/5 blur-[60px] rounded-full animate-pulse delay-1000 pointer-events-none" />
 
       <div className="mx-auto max-w-4xl px-6 relative z-10 text-center">
         <h1 className="about-reveal font-display text-5xl md:text-7xl font-black uppercase tracking-tighter text-white mb-6">
