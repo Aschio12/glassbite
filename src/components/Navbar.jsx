@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ShoppingBag } from 'lucide-react';
 
@@ -36,22 +37,22 @@ export default function Navbar({ cartCount, onCartOpen }) {
   return (
     <header className="nav-shell fixed inset-x-0 top-0 z-40 bg-[#111111]/95 backdrop-blur-md border-b border-[#222222] shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
-        <a href="#top" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <span className="text-display-giant text-3xl tracking-normal text-white">
             GLASS<span className="text-orange-500 drop-shadow-[0_0_10px_rgba(255,107,0,0.5)]">BITE</span>
           </span>
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-10 text-xs font-bold uppercase tracking-widest text-gray-400 md:flex">
-          <a href="#menu" className="transition-colors hover:text-white">
+          <Link to="/" className="transition-colors hover:text-white">
             Menu
-          </a>
-          <a href="#locations" className="transition-colors hover:text-white">
+          </Link>
+          <Link to="/location" className="transition-colors hover:text-white">
             Locations
-          </a>
-          <a href="#about" className="transition-colors hover:text-white">
+          </Link>
+          <Link to="/about" className="transition-colors hover:text-white">
             About
-          </a>
+          </Link>
         </div>
 
         <button
