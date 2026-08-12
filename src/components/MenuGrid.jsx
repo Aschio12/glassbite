@@ -12,7 +12,7 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
             onClick={() => onOpen(item)}
           >
             {/* Glowing Image Section */}
-            <div className="relative aspect-[4/3] w-full flex items-center justify-center p-8 burgerhub-radial-glow overflow-hidden">
+            <div className="relative aspect-[4/3] w-full flex items-center justify-center p-4 burgerhub-radial-glow overflow-hidden">
               <img
                 src={item.image}
                 alt={item.name}
@@ -25,7 +25,7 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
             </div>
 
             {/* Vibrant Typography Content */}
-            <div className="flex flex-1 flex-col justify-between p-8 bg-transparent">
+            <div className="flex flex-1 flex-col justify-between p-6 pt-2 bg-transparent">
               <div className="text-center">
                 <h3 className="font-display text-3xl font-medium tracking-tight text-white/90 group-hover:text-orange-500 transition-colors">
                   {item.name}
