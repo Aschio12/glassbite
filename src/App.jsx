@@ -1,12 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar.jsx';
-import Hero from './components/Hero.jsx';
-import CategoryFilter from './components/CategoryFilter.jsx';
-import MenuGrid from './components/MenuGrid.jsx';
-import ItemModal from './components/ItemModal.jsx';
 import CartDrawer from './components/CartDrawer.jsx';
-import { MENU_ITEMS } from './data/menuData.js';
+import Home from './pages/Home.jsx';
 
 const lineKey = (item, addOns) =>
   `${item.id}|${addOns
@@ -15,18 +12,8 @@ const lineKey = (item, addOns) =>
     .join(',')}`;
 
 export default function App() {
-  const [category, setCategory] = useState('all');
-  const [selectedItem, setSelectedItem] = useState(null);
   const [cartOpen, setCartOpen] = useState(false);
   const [cart, setCart] = useState([]);
-
-  const filteredItems = useMemo(
-    () =>
-      category === 'all'
-        ? MENU_ITEMS
-        : MENU_ITEMS.filter((item) => item.category === category),
-    [category]
-  );
 
   const cartCount = useMemo(() => cart.reduce((sum, e) => sum + e.quantity, 0), [cart]);
 
@@ -55,9 +42,10 @@ export default function App() {
     setCart((prev) => prev.filter((e) => e.key !== key));
   }, []);
 
-  const overlayOpen = selectedItem !== null || cartOpen;
+  const overlayOpen = cartOpen;
 
-  // Body scroll lock while the modal or drawer is open.
+  // Body scroll lock while the drawer is open. (Home modal handles its own or we can just rely on this if we lift state, but we didn't).
+  // Actually, we moved selectedItem to Home, so this only locks for Cart. That's fine for now, or Home can use a lock too.
   useEffect(() => {
     document.body.style.overflow = overlayOpen ? 'hidden' : '';
     return () => {
@@ -65,16 +53,15 @@ export default function App() {
     };
   }, [overlayOpen]);
 
-  // Escape closes whatever overlay is open.
+  // Escape closes Cart
   useEffect(() => {
     const onKeyDown = (e) => {
       if (e.key !== 'Escape') return;
-      if (selectedItem) setSelectedItem(null);
-      else if (cartOpen) setCartOpen(false);
+      if (cartOpen) setCartOpen(false);
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [selectedItem, cartOpen]);
+  }, [cartOpen]);
 
   const handleCheckout = useCallback(() => {
     setCart([]);
@@ -82,34 +69,21 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen flex flex-col">
       <Navbar cartCount={cartCount} onCartOpen={() => setCartOpen(true)} />
 
-      <main className="pt-20">
-        <Hero />
-
-        <section id="menu" className="w-full pb-32 pt-12">
-          <CategoryFilter active={category} onChange={setCategory} />
-          <MenuGrid
-            items={filteredItems}
-            onOpen={setSelectedItem}
-            onAdd={(item) => addToCart(item)}
-          />
-        </section>
-      </main>
+      <div className="flex-1">
+        <Routes>
+          <Route path="/" element={<Home onAddToCart={addToCart} />} />
+          <Route path="/about" element={<div className="pt-32 text-center">About Page Placeholder</div>} />
+          <Route path="/location" element={<div className="pt-32 text-center">Location Page Placeholder</div>} />
+        </Routes>
+      </div>
 
       <footer className="border-t border-[#222222] bg-[#050505] py-24 text-center text-gray-500">
         <p className="mb-4 font-display text-3xl font-black uppercase text-white">GLASS<span className="text-orange-500">BITE</span></p>
         <p className="text-xs uppercase tracking-widest">© {new Date().getFullYear()} No Compromises.</p>
       </footer>
-
-      {selectedItem && (
-        <ItemModal
-          item={selectedItem}
-          onClose={() => setSelectedItem(null)}
-          onAdd={addToCart}
-        />
-      )}
 
       <CartDrawer
         open={cartOpen}
