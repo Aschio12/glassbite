@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ArrowRight } from 'lucide-react';
 
-const HERO_IMAGE = '/images/hero_burger_transparent.png';
+const HERO_IMAGE = '/images/hero_burger_v3.png';
 
 export default function Hero() {
   const sectionRef = useRef(null);
