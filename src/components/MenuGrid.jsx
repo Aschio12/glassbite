@@ -27,7 +27,7 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
             {/* Vibrant Typography Content */}
             <div className="flex flex-1 flex-col justify-between p-6 bg-[#111111]">
               <div className="text-center">
-                <h3 className="font-display text-2xl font-bold tracking-tight text-white group-hover:text-orange-500 transition-colors">
+                <h3 className="font-display text-2xl font-medium tracking-tight text-white/90 group-hover:text-orange-500 transition-colors">
                   {item.name}
                 </h3>
                 <p className="mt-2 text-sm text-gray-400">
