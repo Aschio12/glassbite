@@ -1,4 +1,4 @@
-import { Plus, ShoppingCart } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 
 export default function MenuGrid({ items, onOpen, onAdd }) {
   return (
