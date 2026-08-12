@@ -1,16 +1,35 @@
 import { useEffect } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const ctx = gsap.context(() => {
+      // Initial hero reveal
       gsap.from('.about-reveal', {
         y: 40,
         opacity: 0,
         duration: 1.2,
         stagger: 0.2,
         ease: 'power3.out',
+      });
+
+      // Scroll-triggered process elements
+      gsap.utils.toArray('.process-step').forEach((step, i) => {
+        gsap.from(step, {
+          scrollTrigger: {
+            trigger: step,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+          x: i % 2 === 0 ? -50 : 50,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+        });
       });
     });
     return () => ctx.revert();
@@ -87,7 +106,7 @@ export default function About() {
 
         <div className="space-y-12">
           {['The Sourcing', 'The Preparation', 'The Experience'].map((step, i) => (
-            <div key={i} className="about-reveal flex flex-col md:flex-row gap-8 items-center bg-white/[0.01] border border-white/5 p-8 rounded-3xl hover:bg-white/[0.03] transition-colors">
+            <div key={i} className="process-step flex flex-col md:flex-row gap-8 items-center bg-white/[0.01] border border-white/5 p-8 rounded-3xl hover:bg-white/[0.03] transition-colors">
               <div className="w-20 h-20 shrink-0 rounded-2xl bg-gradient-to-br from-orange-600 to-amber-500 flex items-center justify-center text-3xl font-black text-white shadow-[0_0_30px_rgba(255,107,0,0.3)]">
                 0{i + 1}
               </div>
