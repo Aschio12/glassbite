@@ -3,8 +3,7 @@ import sys
 
 def process_images():
     images = [
-        'public/images/dessert_tiramisu.jpg',
-        'public/images/dessert_sundae.jpg'
+        'public/images/side_sweet_potato.jpg'
     ]
     session = new_session("isnet-general-use")
     

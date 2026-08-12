@@ -214,4 +214,15 @@ export const MENU_ITEMS = [
     category: 'desserts',
     addOns: [],
   }
+,
+  {
+    id: 'sweet-potato-fries',
+    name: 'Sweet Potato Fries',
+    description: 'Crispy sweet potato fries served with a side of aioli dip.',
+    specs: { calories: 430, prepTime: '8 min', size: 'Medium Basket' },
+    price: 5.5,
+    image: '/images/side_sweet_potato_v3.png',
+    category: 'sides',
+    addOns: [],
+  }
 ];
