@@ -1,26 +1,19 @@
-import { useEffect } from 'react';
 import { ShoppingCart } from 'lucide-react';
-import gsap from 'gsap';
+import { motion } from 'framer-motion';
 
 export default function MenuGrid({ items, onOpen, onAdd }) {
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.menu-item-reveal', 
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' }
-      );
-    });
-    return () => ctx.revert();
-  }, [items]);
-
   return (
     <div className="mx-auto grid w-full max-w-[100rem] grid-cols-1 gap-10 px-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 pb-20">
       {items.map((item, index) => {
         const isDarker = index % 3 === 0;
         return (
-          <div
+          <motion.div
             key={item.id}
-            className="menu-item-reveal group relative flex cursor-pointer flex-col burgerhub-card hover:-translate-y-4"
+            initial={{ opacity: 0, y: 80, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative flex cursor-pointer flex-col burgerhub-card hover:-translate-y-4"
             onClick={() => onOpen(item)}
           >
             {/* Glowing Image Section */}
@@ -64,7 +57,7 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         );
       })}
     </div>

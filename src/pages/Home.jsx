@@ -3,6 +3,7 @@ import Hero from '../components/Hero.jsx';
 import CategoryFilter from '../components/CategoryFilter.jsx';
 import MenuGrid from '../components/MenuGrid.jsx';
 import ItemModal from '../components/ItemModal.jsx';
+import ScrollReveal from '../components/ScrollReveal.jsx';
 import { MENU_ITEMS } from '../data/menuData.js';
 
 export default function Home({ onAddToCart }) {
@@ -23,7 +24,10 @@ export default function Home({ onAddToCart }) {
         <Hero />
 
         <section id="menu" className="w-full pb-32 pt-12">
-          <CategoryFilter active={category} onChange={setCategory} />
+          <ScrollReveal direction="up" delay={0.1}>
+            <CategoryFilter active={category} onChange={setCategory} />
+          </ScrollReveal>
+          
           <MenuGrid
             items={filteredItems}
             onOpen={setSelectedItem}
