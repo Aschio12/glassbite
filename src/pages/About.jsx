@@ -43,7 +43,7 @@ export default function About() {
       <div className="absolute bottom-[20%] right-[10%] w-48 h-48 bg-amber-500/5 blur-[60px] rounded-full animate-pulse delay-1000 pointer-events-none" />
 
       <div className="mx-auto max-w-5xl px-6 relative z-10 text-center">
-        <h1 className="about-reveal font-display text-6xl md:text-8xl font-black uppercase tracking-tighter text-white mb-10 leading-[1.1]">
+        <h1 className="about-reveal font-display text-6xl md:text-8xl font-black uppercase tracking-normal text-white mb-10 leading-tight">
           The <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-600">GlassBite</span> <br className="hidden md:block" /> Philosophy
         </h1>
         
