@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Instagram, Twitter, Facebook } from 'lucide-react';
+import { MapPin, Phone, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -57,14 +57,11 @@ export default function Footer() {
         <div className="space-y-4">
           <h4 className="text-white font-bold mb-6 tracking-wide">CONNECT</h4>
           <div className="flex gap-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-all text-gray-400">
-              <Instagram className="w-5 h-5" />
+            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-all text-gray-400 font-bold text-xs">
+              IG
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-all text-gray-400">
-              <Twitter className="w-5 h-5" />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-all text-gray-400">
-              <Facebook className="w-5 h-5" />
+            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-all text-gray-400 font-bold text-xs">
+              X
             </a>
           </div>
         </div>

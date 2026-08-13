@@ -109,6 +109,12 @@ export default function ItemModal({ item, onClose, onAdd }) {
                           : 'border-[#222222] bg-black hover:border-gray-600 text-gray-400 hover:text-white'
                       }`}
                     >
+                      <input
+                        type="checkbox"
+                        className="sr-only"
+                        checked={checked}
+                        onChange={() => toggleAddOn(addOn.id)}
+                      />
                       <span className="flex items-center gap-4 font-bold">
                         <div className={`grid h-5 w-5 place-items-center border ${checked ? 'border-orange-500 bg-orange-500' : 'border-[#222222] bg-transparent'}`}>
                           {checked && <div className="h-2 w-2 bg-black" />}
