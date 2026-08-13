@@ -42,12 +42,12 @@ export default function About() {
       <div className="absolute top-[20%] left-[10%] w-32 h-32 bg-orange-600/5 blur-[50px] rounded-full animate-pulse pointer-events-none" />
       <div className="absolute bottom-[20%] right-[10%] w-48 h-48 bg-amber-500/5 blur-[60px] rounded-full animate-pulse delay-1000 pointer-events-none" />
 
-      <div className="mx-auto max-w-4xl px-6 relative z-10 text-center">
-        <h1 className="about-reveal font-display text-5xl md:text-7xl font-black uppercase tracking-tighter text-white mb-6">
-          The <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-600">GlassBite</span> Philosophy
+      <div className="mx-auto max-w-5xl px-6 relative z-10 text-center">
+        <h1 className="about-reveal font-display text-6xl md:text-8xl font-black uppercase tracking-tighter text-white mb-10 leading-[1.1]">
+          The <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-600">GlassBite</span> <br className="hidden md:block" /> Philosophy
         </h1>
         
-        <p className="about-reveal text-xl md:text-2xl font-light text-gray-300 leading-relaxed mb-12">
+        <p className="about-reveal text-2xl md:text-3xl font-light text-gray-300 leading-relaxed mb-20 max-w-3xl mx-auto">
           We believe that fast food shouldn't mean compromised quality. 
           Every ingredient is meticulously sourced, every recipe is perfected, 
           and every meal is an experience.
