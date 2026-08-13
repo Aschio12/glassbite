@@ -1,22 +1,24 @@
 import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, ZoomControl, useMap } from 'react-leaflet';
 import gsap from 'gsap';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine';
 import L from 'leaflet';
-import { MapPin, Navigation, Clock, Phone, Globe } from 'lucide-react';
+import { MapPin, Navigation, Clock, Phone } from 'lucide-react';
 
 // Custom Map Marker with Glowing Effect
-const createCustomIcon = () => {
+const createCustomIcon = (isUser = false) => {
+  const color = isUser ? '#3b82f6' : '#f97316'; // Blue for user, Orange for destination
   return L.divIcon({
     className: 'custom-map-marker',
     html: `
       <div style="
         width: 32px; 
         height: 32px; 
-        background: #f97316; 
+        background: ${color}; 
         border: 4px solid #fff; 
         border-radius: 50%; 
-        box-shadow: 0 0 25px rgba(249, 115, 22, 0.8), 0 0 10px rgba(249, 115, 22, 1);
+        box-shadow: 0 0 25px ${color}cc, 0 0 10px ${color};
         display: flex;
         justify-content: center;
         align-items: center;
@@ -27,9 +29,9 @@ const createCustomIcon = () => {
       </div>
       <style>
         @keyframes pulse {
-          0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
-          70% { box-shadow: 0 0 0 20px rgba(249, 115, 22, 0); }
-          100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+          0% { box-shadow: 0 0 0 0 ${color}aa; }
+          70% { box-shadow: 0 0 0 20px ${color}00; }
+          100% { box-shadow: 0 0 0 0 ${color}00; }
         }
       </style>
     `,
@@ -39,10 +41,75 @@ const createCustomIcon = () => {
   });
 };
 
-const position = [9.025, 38.7469]; // Addis Ababa, Ethiopia
+const DESTINATION = [9.025, 38.7469]; // Addis Ababa, Ethiopia
+
+function RoutingControl({ userLocation, destination }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!userLocation || !destination) return;
+
+    // Center map slightly to fit route better when first found
+    map.fitBounds([userLocation, destination], { padding: [50, 50] });
+
+    const routingControl = L.Routing.control({
+      waypoints: [
+        L.latLng(userLocation[0], userLocation[1]),
+        L.latLng(destination[0], destination[1])
+      ],
+      routeWhileDragging: false,
+      addWaypoints: false,
+      show: false, // hide the text directions panel for a cleaner look
+      createMarker: () => null, // disable default markers, we handle our own
+      lineOptions: {
+        styles: [{ color: '#f97316', weight: 6, opacity: 0.8 }]
+      }
+    }).addTo(map);
+
+    return () => {
+      try {
+        map.removeControl(routingControl);
+      } catch(e) {
+        // ignore issues on unmount
+      }
+    };
+  }, [map, userLocation, destination]);
+
+  return null;
+}
 
 export default function Location() {
   const [mapReady, setMapReady] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
+  const [trackingId, setTrackingId] = useState(null);
+
+  const startTracking = () => {
+    if (trackingId !== null) return; // already tracking
+
+    if ('geolocation' in navigator) {
+      const id = navigator.geolocation.watchPosition(
+        (pos) => {
+          setUserLocation([pos.coords.latitude, pos.coords.longitude]);
+        },
+        (err) => {
+          console.error("Error watching location:", err);
+          alert("Could not access your location. Please check permissions.");
+        },
+        { enableHighAccuracy: true, maximumAge: 0 }
+      );
+      setTrackingId(id);
+    } else {
+      alert("Geolocation is not supported by your browser.");
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (trackingId !== null) {
+        navigator.geolocation.clearWatch(trackingId);
+      }
+    };
+  }, [trackingId]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -64,7 +131,7 @@ export default function Location() {
       {/* Full Screen Map */}
       <div className="absolute inset-0 z-0 opacity-80 mt-16 md:mt-0">
         <MapContainer 
-          center={position} 
+          center={DESTINATION} 
           zoom={14} 
           scrollWheelZoom={true} 
           zoomControl={false}
@@ -76,7 +143,8 @@ export default function Location() {
             attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
           />
-          <Marker position={position} icon={createCustomIcon()}>
+          
+          <Marker position={DESTINATION} icon={createCustomIcon(false)}>
             <Popup className="premium-popup">
               <div className="text-center font-sans p-1">
                 <strong className="text-orange-500 text-lg font-black tracking-wide">GlassBite AA</strong><br />
@@ -84,58 +152,78 @@ export default function Location() {
               </div>
             </Popup>
           </Marker>
-          <ZoomControl position="bottomright" />
+
+          {userLocation && (
+            <Marker position={userLocation} icon={createCustomIcon(true)}>
+              <Popup className="premium-popup">
+                <div className="text-center font-sans p-1">
+                  <strong className="text-blue-500 text-lg font-black tracking-wide">You</strong><br />
+                  <span className="text-gray-600 text-sm">Your live location</span>
+                </div>
+              </Popup>
+            </Marker>
+          )}
+
+          {userLocation && mapReady && (
+            <RoutingControl userLocation={userLocation} destination={DESTINATION} />
+          )}
+
+          <ZoomControl position="topright" />
         </MapContainer>
       </div>
 
-      {/* Floating Glassmorphism Overlay Panel */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 h-screen flex items-center pointer-events-none">
-        <div className="location-overlay-panel pointer-events-auto w-full max-w-md bg-black/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-[0_30px_60px_rgba(0,0,0,0.8),_0_0_40px_rgba(255,107,0,0.15)] mt-24">
+      {/* Floating Glassmorphism Overlay Panel - Positioned Bottom Left */}
+      <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 z-10 w-full max-w-md pointer-events-none">
+        <div className="location-overlay-panel pointer-events-auto bg-black/60 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 shadow-[0_30px_60px_rgba(0,0,0,0.8),_0_0_40px_rgba(255,107,0,0.15)]">
           <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/20 rounded-full blur-[50px] -z-10" />
           
-          <h1 className="location-reveal-item font-display text-4xl md:text-5xl font-black uppercase tracking-tighter text-white mb-2">
+          <h1 className="location-reveal-item font-display text-4xl font-black uppercase tracking-tighter text-white mb-2">
             Flagship <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-600">Location</span>
           </h1>
-          <p className="location-reveal-item text-gray-400 mb-8 font-light leading-relaxed">
+          <p className="location-reveal-item text-gray-400 mb-6 font-light leading-relaxed text-sm">
             Experience our culinary art right in the heart of Addis Ababa.
           </p>
 
-          <div className="space-y-6">
-            <div className="location-reveal-item flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20 text-orange-500">
-                <MapPin className="w-6 h-6" />
+          <div className="space-y-4">
+            <div className="location-reveal-item flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20 text-orange-500">
+                <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-white font-bold tracking-wide mb-1">ADDRESS</h3>
-                <p className="text-gray-400 text-sm">Bole Road, Olympia Area<br />Addis Ababa, Ethiopia</p>
+                <h3 className="text-white font-bold tracking-wide mb-1 text-sm">ADDRESS</h3>
+                <p className="text-gray-400 text-xs">Bole Road, Olympia Area<br />Addis Ababa, Ethiopia</p>
               </div>
             </div>
 
-            <div className="location-reveal-item flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20 text-orange-500">
-                <Clock className="w-6 h-6" />
+            <div className="location-reveal-item flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20 text-orange-500">
+                <Clock className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-white font-bold tracking-wide mb-1">OPENING HOURS</h3>
-                <p className="text-gray-400 text-sm">Everyday: 11:00 AM - 11:00 PM<br />Weekends: Until 1:00 AM</p>
+                <h3 className="text-white font-bold tracking-wide mb-1 text-sm">HOURS</h3>
+                <p className="text-gray-400 text-xs">Everyday: 11:00 AM - 11:00 PM</p>
               </div>
             </div>
 
-            <div className="location-reveal-item flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20 text-orange-500">
-                <Phone className="w-6 h-6" />
+            <div className="location-reveal-item flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20 text-orange-500">
+                <Phone className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-white font-bold tracking-wide mb-1">RESERVATIONS</h3>
-                <p className="text-gray-400 text-sm">+251 911 234 567<br />table@glassbite.et</p>
+                <h3 className="text-white font-bold tracking-wide mb-1 text-sm">RESERVATIONS</h3>
+                <p className="text-gray-400 text-xs">+251 911 234 567</p>
               </div>
             </div>
           </div>
 
-          <button className="location-reveal-item mt-10 w-full burgerhub-button-primary py-4 text-sm tracking-widest flex justify-center items-center gap-2 relative overflow-hidden group">
+          <button 
+            onClick={startTracking}
+            disabled={trackingId !== null}
+            className="location-reveal-item mt-8 w-full burgerhub-button-primary py-3 text-sm tracking-widest flex justify-center items-center gap-2 relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             <div className="absolute inset-0 bg-white/20 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300" />
             <Navigation className="w-4 h-4 relative z-10" />
-            <span className="relative z-10">GET DIRECTIONS</span>
+            <span className="relative z-10">{trackingId !== null ? 'ROUTING...' : 'GET DIRECTIONS'}</span>
           </button>
         </div>
       </div>
