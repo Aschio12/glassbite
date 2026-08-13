@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
-import gsap from 'gsap';
+import { useMemo, useRef } from 'react';
 import { Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
 import { TAX_RATE, formatPrice } from '../data/menuData.js';
 
@@ -7,69 +6,35 @@ export const cartLineTotal = (entry) =>
   (entry.item.price + entry.addOns.reduce((s, a) => s + a.price, 0)) * entry.quantity;
 
 export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove, onCheckout }) {
-  const overlayRef = useRef(null);
-  const panelRef = useRef(null);
   const rowRefs = useRef(new Map());
-
-  // Slide the panel in/out whenever `open` flips.
-  useEffect(() => {
-    if (!overlayRef.current || !panelRef.current) return;
-    if (open) {
-      gsap.to(overlayRef.current, { opacity: 1, duration: 0.2, ease: 'power2.out' });
-      gsap.fromTo(
-        panelRef.current,
-        { xPercent: 110 },
-        { xPercent: 0, duration: 0.4, ease: 'power4.out' }
-      );
-    } else {
-      gsap.to(overlayRef.current, { opacity: 0, duration: 0.2, ease: 'power2.in' });
-      gsap.to(panelRef.current, { xPercent: 110, duration: 0.3, ease: 'power3.in' });
-    }
-  }, [open]);
 
   const subtotal = useMemo(() => cart.reduce((sum, e) => sum + cartLineTotal(e), 0), [cart]);
   const tax = subtotal * TAX_RATE;
   const total = subtotal + tax;
 
   const handleRemove = (key) => {
-    const row = rowRefs.current.get(key);
-    if (!row) {
-      onRemove(key);
-      return;
-    }
-    gsap.to(row, {
-      x: 90,
-      opacity: 0,
-      height: 0,
-      marginBottom: 0,
-      paddingTop: 0,
-      paddingBottom: 0,
-      duration: 0.3,
-      ease: 'power3.in',
-      onComplete: () => onRemove(key),
-    });
+    onRemove(key);
   };
 
   return (
     <div
-      className={`fixed inset-0 z-50 ${open ? '' : 'pointer-events-none'}`}
+      className={`fixed inset-0 z-50 transition-opacity duration-300 ${open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
       aria-hidden={!open}
     >
       {/* Overlay */}
       <div
-        ref={overlayRef}
-        className="absolute inset-0 bg-black/80 opacity-0"
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
         onClick={onClose}
       />
 
       {/* Panel */}
       <aside
-        ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-label="Shopping cart"
-        className="absolute bottom-0 right-0 top-0 flex w-full max-w-md translate-x-full flex-col border-l-2 border-[#222222] bg-[#111111] will-change-transform"
-        style={{ transform: 'translateX(110%)' }}
+        className={`absolute bottom-0 right-0 top-0 flex w-full max-w-md flex-col border-l-2 border-[#222222] bg-[#111111] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          open ? 'translate-x-0' : 'translate-x-full'
+        }`}
       >
         <div className="flex items-center justify-between border-b-2 border-[#222222] px-6 py-6">
           <h2 className="flex items-center gap-3 font-display text-3xl font-black uppercase text-white tracking-tight">

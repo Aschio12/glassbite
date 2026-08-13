@@ -5,14 +5,16 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-orange-500: #f97316;
+  }
+  
   html {
     scroll-behavior: smooth;
-    background-color: #050505;
   }
 
   body {
-    @apply text-white font-sans antialiased overflow-x-hidden;
-    background-color: #050505;
+    @apply bg-[#050505] text-white font-sans antialiased overflow-x-hidden;
   }
 
   ::selection {
