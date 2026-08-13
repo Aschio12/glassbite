@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 import Navbar from './components/Navbar.jsx';
+import BottomNav from './components/BottomNav.jsx';
 import CartDrawer from './components/CartDrawer.jsx';
+import LoadingScreen from './components/LoadingScreen.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
-import Location from './pages/Location.jsx';
+import LocationPage from './pages/Location.jsx';
 import Footer from './components/Footer.jsx';
 
 const lineKey = (item, addOns) =>
@@ -17,6 +19,8 @@ const lineKey = (item, addOns) =>
 export default function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [cart, setCart] = useState([]);
+  const routerLocation = useLocation();
+  const isLocationPage = routerLocation.pathname === '/location';
 
   const cartCount = useMemo(() => cart.reduce((sum, e) => sum + e.quantity, 0), [cart]);
 
@@ -47,8 +51,6 @@ export default function App() {
 
   const overlayOpen = cartOpen;
 
-  // Body scroll lock while the drawer is open. (Home modal handles its own or we can just rely on this if we lift state, but we didn't).
-  // Actually, we moved selectedItem to Home, so this only locks for Cart. That's fine for now, or Home can use a lock too.
   useEffect(() => {
     document.body.style.overflow = overlayOpen ? 'hidden' : '';
     return () => {
@@ -56,7 +58,6 @@ export default function App() {
     };
   }, [overlayOpen]);
 
-  // Escape closes Cart
   useEffect(() => {
     const onKeyDown = (e) => {
       if (e.key !== 'Escape') return;
@@ -72,18 +73,40 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative min-h-screen flex flex-col pb-16 md:pb-0">
+      <LoadingScreen />
       <Navbar cartCount={cartCount} onCartOpen={() => setCartOpen(true)} />
 
-      <div className="flex-1">
-        <Routes>
-          <Route path="/" element={<Home onAddToCart={addToCart} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/location" element={<Location />} />
-        </Routes>
+      <div className="flex-1 flex flex-col">
+        {/* Main Routes */}
+        <div style={{ display: isLocationPage ? 'none' : 'block', flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Home onAddToCart={addToCart} />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </div>
+        
+        {/* Persistent Location Page */}
+        <div 
+          style={{ 
+            display: isLocationPage ? 'block' : 'block', // always block so Leaflet doesn't break on resize
+            position: isLocationPage ? 'static' : 'fixed',
+            top: isLocationPage ? 'auto' : '-9999px',
+            left: isLocationPage ? 'auto' : '-9999px',
+            visibility: isLocationPage ? 'visible' : 'hidden',
+            width: '100%',
+            height: isLocationPage ? 'auto' : '100vh',
+            zIndex: 10,
+            flex: isLocationPage ? 1 : 'none'
+          }}
+        >
+          <LocationPage />
+        </div>
       </div>
 
       <Footer />
+
+      <BottomNav cartCount={cartCount} onCartOpen={() => setCartOpen(true)} />
 
       <CartDrawer
         open={cartOpen}

@@ -59,7 +59,7 @@ export default function Navbar({ cartCount, onCartOpen }) {
           type="button"
           onClick={onCartOpen}
           aria-label={`Open cart, ${cartCount} items`}
-          className="group relative flex items-center gap-3 px-2 py-1 transition-colors hover:text-orange-500"
+          className="group relative hidden md:flex items-center gap-3 px-2 py-1 transition-colors hover:text-orange-500"
         >
           <span className="text-xs font-bold uppercase tracking-widest hidden sm:inline text-white group-hover:text-orange-500 transition-colors">Bag</span>
           <div className="relative">
