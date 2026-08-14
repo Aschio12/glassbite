@@ -2,7 +2,7 @@
 
 > **A cinematic, glassmorphic fast-food ordering experience.**
 
-![GlassBite Hero](./public/screenshots/hero.png)
+![GlassBite Landing Page](./public/screenshots/landing_page.png)
 
 GlassBite is a highly-polished, visually stunning React web application designed to bring a premium, app-like feel to the fast-food ordering process. Built with a modern dark theme, it features deep, immersive colors, smooth scrolling animations, and beautiful glassmorphism UI components.
 
@@ -21,21 +21,29 @@ GlassBite is a highly-polished, visually stunning React web application designed
 
 ## 📸 UI Walkthrough
 
+### 🏠 Landing Page
+A breathtaking cinematic introduction to the app.
+![Landing Page](./public/screenshots/landing_page.png)
+
 ### 📜 The Menu
 Explore our delicious offerings with a grid that smoothly animates items into view as you scroll.
-![Menu Section](./public/screenshots/menu.png)
+![Menu Section 1](./public/screenshots/menu_section_1.png)
+
+### 🍔 Endless Variety
+Keep scrolling to reveal beautifully presented categories and items.
+![Menu Section 2](./public/screenshots/menu_section_2.png)
 
 ### 🔍 Interactive Item Details
-Click on any item to view its detailed ingredients and add it to your cart.
-![Item Modal](./public/screenshots/modal.png)
+Click on any item to view its detailed ingredients and add it to your cart. 
+![Detail Modal](./public/screenshots/detail_modal.png)
 
-### 🛒 Seamless Cart Drawer
-A beautiful glassmorphic slide-out drawer keeps track of your order without leaving the page.
-![Cart Drawer](./public/screenshots/cart.png)
-
-### 📍 Find Us
-Check out our locations with an interactive map tailored to our dark, cinematic aesthetic.
+### 📍 Find Us & Get Directions
+Check out our locations with an interactive map tailored to our dark, cinematic aesthetic. Get active routing straight to our door.
 ![Locations Page](./public/screenshots/locations.png)
+
+### ℹ️ About Us
+Learn about our story and our commitment to quality.
+![About Page](./public/screenshots/about.png)
 
 ---
 
