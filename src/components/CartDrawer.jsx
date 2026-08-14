@@ -154,7 +154,7 @@ export default function CartDrawer({ open, cart, onClose, onUpdateQty, onRemove,
             <button
               type="button"
               onClick={onCheckout}
-              className="mt-6 flex h-14 w-full items-center justify-center bg-white font-display text-xl font-black uppercase tracking-tight text-black transition-colors hover:bg-orange-500"
+              className="mt-6 flex h-16 w-full items-center justify-center bg-white font-display text-xl font-black uppercase tracking-wider text-black transition-all hover:bg-orange-500 hover:text-white"
             >
               Checkout — {formatPrice(total)}
             </button>

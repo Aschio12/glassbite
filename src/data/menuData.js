@@ -30,6 +30,7 @@ export const MENU_ITEMS = [
     price: 18.5,
     image: '/images/hero_burger_v3.png',
     category: 'burgers',
+    ingredients: ['Wagyu Beef', 'Cheddar', 'Caramelised Onions', 'House Sauce', 'Brioche Bun'],
     addOns: withAddons([{ id: 'bacon', label: 'Crispy Bacon', price: 3.0 }]),
   },
   {
@@ -40,6 +41,7 @@ export const MENU_ITEMS = [
     price: 14.5,
     image: '/images/classic_burger_v3.png',
     category: 'burgers',
+    ingredients: ['Beef Patty', 'Lettuce', 'Tomato', 'Pickles', 'Brioche Bun'],
     addOns: withAddons([{ id: 'fried-egg', label: 'Fried Egg', price: 2.0 }]),
   },
   {
@@ -50,6 +52,7 @@ export const MENU_ITEMS = [
     price: 16.5,
     image: '/images/bacon_burger_v3.png',
     category: 'burgers',
+    ingredients: ['Beef Patty', 'Smoked Bacon', 'BBQ Sauce', 'Blue Cheese', 'Brioche Bun'],
     addOns: withAddons([{ id: 'extra-blue', label: 'Extra Blue Cheese', price: 2.5 }]),
   },
   {
@@ -60,6 +63,7 @@ export const MENU_ITEMS = [
     price: 15.0,
     image: '/images/chicken_burger_v3.png',
     category: 'burgers',
+    ingredients: ['Fried Chicken Breast', 'Spicy Mayo', 'Lettuce', 'Brioche Bun'],
     addOns: withAddons([{ id: 'jalapenos', label: 'Jalapeños', price: 1.0 }]),
   },
   {
@@ -70,6 +74,7 @@ export const MENU_ITEMS = [
     price: 19.0,
     image: '/images/pepperoni_pizza_v3.png',
     category: 'pizzas',
+    ingredients: ['Pizza Dough', 'Pepperoni', 'Fior di latte', 'Chilli Honey', 'Tomato Sauce'],
     addOns: withAddons([{ id: 'burrata', label: 'Fresh Burrata', price: 4.5 }]),
   },
   {
@@ -80,6 +85,7 @@ export const MENU_ITEMS = [
     price: 16.0,
     image: '/images/margherita_pizza_v3.png',
     category: 'pizzas',
+    ingredients: ['Pizza Dough', 'San Marzano Tomatoes', 'Fresh Mozzarella', 'Basil'],
     addOns: withAddons([{ id: 'prosciutto', label: 'Prosciutto', price: 3.5 }]),
   },
   {
@@ -90,6 +96,7 @@ export const MENU_ITEMS = [
     price: 20.0,
     image: '/images/bbq_pizza_v3.png',
     category: 'pizzas',
+    ingredients: ['Pizza Dough', 'BBQ Sauce', 'Grilled Chicken', 'Red Onions', 'Cilantro'],
     addOns: withAddons([{ id: 'bacon', label: 'Crispy Bacon', price: 3.0 }]),
   },
   {
@@ -100,6 +107,7 @@ export const MENU_ITEMS = [
     price: 48.0,
     image: '/images/main_steak_v3.png',
     category: 'mains',
+    ingredients: ['Bone-in Ribeye', 'Garlic Butter', 'Sea Salt', 'Black Pepper'],
     addOns: withAddons([{ id: 'garlic-butter', label: 'Garlic Butter', price: 2.0 }]),
   },
   {
@@ -110,16 +118,18 @@ export const MENU_ITEMS = [
     price: 16.5,
     image: '/images/main_pasta_v3.png',
     category: 'mains',
+    ingredients: ['Tagliatelle', 'Heavy Cream', 'Parmesan Cheese', 'Garlic', 'Parsley'],
     addOns: [{ id: 'parmesan', label: 'Extra Parmesan', price: 2.0 }],
   },
   {
     id: 'truffle-fries',
-    name: 'Golden French Fries',
+    name: 'Truffle Parmesan Fries',
     description: 'Twice-cooked crispy fries with salt crystals and ketchup.',
     specs: { calories: 520, prepTime: '8 min', size: 'Sharing basket' },
     price: 9.0,
     image: '/images/side_fries_v3.png',
     category: 'sides',
+    ingredients: ['Potatoes', 'Sea Salt', 'Truffle Oil', 'Parmesan', 'Ketchup'],
     addOns: [...SAUCE_ADDONS, { id: 'parmesan', label: 'Extra Parmesan', price: 2.0 }],
   },
   {
@@ -130,6 +140,7 @@ export const MENU_ITEMS = [
     price: 12.0,
     image: '/images/dessert_cake_v3.png',
     category: 'desserts',
+    ingredients: ['Chocolate Sponge', 'Fudge', 'Vanilla Ice Cream', 'Cocoa Powder'],
     addOns: [{ id: 'ice-cream', label: 'Vanilla Bean Ice Cream', price: 3.0 }],
   },
   {
@@ -140,6 +151,7 @@ export const MENU_ITEMS = [
     price: 12.0,
     image: '/images/drink_cocktail_v3.png',
     category: 'drinks',
+    ingredients: ['White Rum', 'Strawberries', 'Mint Leaves', 'Lime Juice', 'Soda Water'],
     addOns: [],
   },
 
@@ -151,6 +163,7 @@ export const MENU_ITEMS = [
     price: 5.5,
     image: '/images/drink_iced_coffee_v3.png',
     category: 'drinks',
+    ingredients: ['Espresso', 'Vanilla Syrup', 'Milk', 'Ice'],
     addOns: [],
   },
   {
@@ -161,6 +174,7 @@ export const MENU_ITEMS = [
     price: 4.5,
     image: '/images/drink_lemonade_v3.png',
     category: 'drinks',
+    ingredients: ['Lemon Juice', 'Mint Leaves', 'Simple Syrup', 'Water', 'Ice'],
     addOns: [],
   },
   {
@@ -171,6 +185,7 @@ export const MENU_ITEMS = [
     price: 6.0,
     image: '/images/drink_matcha_v3.png',
     category: 'drinks',
+    ingredients: ['Ceremonial Matcha', 'Oat Milk', 'Simple Syrup', 'Ice'],
     addOns: [],
   },
   {
@@ -181,6 +196,7 @@ export const MENU_ITEMS = [
     price: 18.0,
     image: '/images/food_sushi_v3.png',
     category: 'mains',
+    ingredients: ['Sushi Rice', 'Fresh Salmon', 'Avocado', 'Nori', 'Soy Sauce', 'Pickled Ginger'],
     addOns: [],
   },
   {
@@ -191,6 +207,7 @@ export const MENU_ITEMS = [
     price: 9.5,
     image: '/images/dessert_cheesecake_v3.png',
     category: 'desserts',
+    ingredients: ['Cream Cheese', 'Graham Cracker Crust', 'Strawberries', 'Sugar', 'Vanilla Extract'],
     addOns: [],
   }
 ,
@@ -202,6 +219,7 @@ export const MENU_ITEMS = [
     price: 8.5,
     image: '/images/dessert_tiramisu_v3.png',
     category: 'desserts',
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Espresso', 'Cocoa Powder', 'Marsala Wine'],
     addOns: [],
   },
   {
@@ -212,6 +230,7 @@ export const MENU_ITEMS = [
     price: 11.0,
     image: '/images/dessert_sundae_v3.png',
     category: 'desserts',
+    ingredients: ['Chocolate Brownie', 'Vanilla Ice Cream', 'Whipped Cream', 'Maraschino Cherry'],
     addOns: [],
   },
   {
@@ -220,8 +239,9 @@ export const MENU_ITEMS = [
     description: 'Classic thin-cut fries, lightly salted.',
     specs: { calories: 380, prepTime: '5 min', size: 'Medium Box' },
     price: 4.0,
-    image: '/@fs/home/aschalew/.gemini/antigravity/brain/3afe49f4-42d8-4cef-9365-8f940927e8ff/side_golden_fries_v4_1786632718117.jpg',
+    image: '/images/side_golden_fries_v7.png',
     category: 'sides',
+    ingredients: ['Potatoes', 'Vegetable Oil', 'Sea Salt'],
     addOns: [],
   },
   {
@@ -230,8 +250,9 @@ export const MENU_ITEMS = [
     description: 'Crispy sweet potato fries served with a side of aioli dip.',
     specs: { calories: 430, prepTime: '8 min', size: 'Medium Basket' },
     price: 5.5,
-    image: '/@fs/home/aschalew/.gemini/antigravity/brain/3afe49f4-42d8-4cef-9365-8f940927e8ff/side_sweet_potato_v3_1786629864320.jpg',
+    image: '/images/side_sweet_potato_v4.png',
     category: 'sides',
+    ingredients: ['Sweet Potatoes', 'Vegetable Oil', 'Sea Salt', 'Aioli Dip'],
     addOns: [],
   },
   {
@@ -240,8 +261,9 @@ export const MENU_ITEMS = [
     description: 'Thick-cut, golden crispy onion rings with a side of creamy dip.',
     specs: { calories: 510, prepTime: '10 min', size: 'Sharing Tower' },
     price: 7.0,
-    image: '/@fs/home/aschalew/.gemini/antigravity/brain/3afe49f4-42d8-4cef-9365-8f940927e8ff/side_onion_rings_v3_1786629876124.jpg',
+    image: '/images/side_onion_rings_v4.png',
     category: 'sides',
+    ingredients: ['Onion Rings', 'Beer Batter', 'Vegetable Oil', 'Creamy Dip'],
     addOns: [],
   }
 ];

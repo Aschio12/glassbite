@@ -79,6 +79,22 @@ export default function ItemModal({ item, onClose, onAdd }) {
             </p>
           </div>
 
+          {/* Ingredients */}
+          {item.ingredients && item.ingredients.length > 0 && (
+            <div className="mb-8">
+              <p className="mb-3 text-xs font-black uppercase tracking-widest text-orange-500">
+                Ingredients
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {item.ingredients.map((ingredient, idx) => (
+                  <span key={idx} className="border border-[#333333] bg-[#1a1a1a] px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-300">
+                    {ingredient}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="mb-8 flex flex-wrap gap-4 text-xs font-bold uppercase tracking-widest text-gray-500">
             <span className="border border-[#222222] px-3 py-2">
               {item.specs.calories} kcal

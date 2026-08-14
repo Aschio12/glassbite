@@ -1,21 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 
 export default function LoadingScreen() {
   const [visible, setVisible] = useState(true);
+  const [progress, setProgress] = useState(0);
   const location = useLocation();
+  
+  const wrapperRef = useRef(null);
+  const burgerRef = useRef(null);
+  const textRef = useRef(null);
+  const ringRef = useRef(null);
 
   useEffect(() => {
     setVisible(true);
-    
-    // Scroll lock while loading
     document.body.style.overflow = 'hidden';
     
-    // Ensure loader text and overlay are reset for subsequent loads
-    gsap.set('.loader-burger', { scale: 1 });
-    gsap.set('.loader-text', { opacity: 1, y: 0 });
-    gsap.set('.loader-overlay', { yPercent: 0 });
+    // Reset
+    gsap.set(wrapperRef.current, { opacity: 1, display: 'flex' });
+    gsap.set(burgerRef.current, { scale: 0, rotation: -45 });
+    gsap.set(textRef.current, { opacity: 0, y: 20 });
+    gsap.set(ringRef.current, { strokeDashoffset: 565.48 }); // 2 * pi * 90
+    setProgress(0);
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -24,43 +30,118 @@ export default function LoadingScreen() {
       }
     });
 
-    tl.to('.loader-burger', {
-      scale: 1.1,
-      duration: 0.6,
-      yoyo: true,
-      repeat: 1,
-      ease: 'power2.inOut',
+    // 1. Pop in the burger and text
+    tl.to(burgerRef.current, {
+      scale: 1,
+      rotation: 0,
+      duration: 0.8,
+      ease: 'back.out(1.7)',
     })
-    .to('.loader-text', {
+    .to(textRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power3.out',
+    }, '-=0.4');
+
+    // 2. Loading progress
+    const counter = { val: 0 };
+    tl.to(counter, {
+      val: 100,
+      duration: 1.2,
+      ease: 'power2.inOut',
+      onUpdate: () => {
+        const p = Math.round(counter.val);
+        setProgress(p);
+        const offset = 565.48 - (p / 100) * 565.48;
+        gsap.set(ringRef.current, { strokeDashoffset: offset });
+      }
+    });
+
+    // 3. Zoom the burger into the camera
+    tl.to(textRef.current, {
       opacity: 0,
-      y: 10,
+      y: 20,
       duration: 0.3,
-    }, '-=0.3')
-    .to('.loader-overlay', {
-      yPercent: -100,
-      duration: 0.6,
-      ease: 'power4.inOut',
-    }, '+=0.1');
+      ease: 'power3.in',
+    })
+    .to(burgerRef.current, {
+      scale: 40, // massive zoom to cover the screen
+      opacity: 0,
+      duration: 0.8,
+      ease: 'expo.in',
+    }, '-=0.1')
+    .to(wrapperRef.current, {
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power2.in',
+    }, '-=0.4');
+
+    // Subtle float effect for the burger while loading
+    gsap.to(burgerRef.current, {
+      y: -15,
+      duration: 1.5,
+      yoyo: true,
+      repeat: -1,
+      ease: 'sine.inOut'
+    });
 
     return () => {
       document.body.style.overflow = '';
+      gsap.killTweensOf([burgerRef.current, textRef.current, ringRef.current, wrapperRef.current, counter]);
       tl.kill();
     };
-  }, [location.pathname]); // Trigger on every route change
+  }, [location.pathname]);
 
   if (!visible) return null;
 
   return (
-    <div className="loader-overlay fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050505]">
-      {/* Sleek glowing burger icon */}
-      <div className="loader-burger relative flex flex-col items-center justify-center gap-1">
-        <div className="h-3 w-16 rounded-t-full bg-orange-500 shadow-[0_0_15px_rgba(255,107,0,0.8)]" />
-        <div className="h-2 w-18 rounded-full bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.8)] ml-1 mr-1" style={{ width: '70px' }} />
-        <div className="h-2 w-16 bg-red-600 shadow-[0_0_10px_rgba(220,38,38,0.8)]" />
-        <div className="h-3 w-16 rounded-b-full bg-orange-500 shadow-[0_0_15px_rgba(255,107,0,0.8)]" />
+    <div ref={wrapperRef} className="fixed inset-0 z-[9999] bg-[#050505] flex flex-col items-center justify-center">
+      
+      {/* Burger & Ring Container */}
+      <div className="relative flex items-center justify-center w-[220px] h-[220px] mb-8">
+        {/* SVG Progress Ring */}
+        <svg className="absolute inset-0 w-full h-full transform -rotate-90">
+          {/* Background Ring */}
+          <circle 
+            cx="110" cy="110" r="90" 
+            stroke="#1a1a1a" 
+            strokeWidth="4" 
+            fill="none" 
+          />
+          {/* Progress Ring */}
+          <circle 
+            ref={ringRef}
+            cx="110" cy="110" r="90" 
+            stroke="#f97316"
+            strokeWidth="6" 
+            fill="none"
+            strokeLinecap="round"
+            style={{ 
+              strokeDasharray: 565.48,
+              strokeDashoffset: 565.48 
+            }}
+            className="drop-shadow-[0_0_12px_rgba(249,115,22,0.8)]"
+          />
+        </svg>
+
+        {/* Hero Burger Image */}
+        <img 
+          ref={burgerRef}
+          src="/images/hero_burger_v3.png" 
+          alt="Loading Burger" 
+          className="w-[140px] h-auto object-contain drop-shadow-2xl z-10 relative"
+        />
       </div>
-      <div className="loader-text mt-8 font-display text-2xl font-black uppercase tracking-widest text-white">
-        Glass<span className="text-orange-500">Bite</span>
+
+      {/* Text Container */}
+      <div ref={textRef} className="flex flex-col items-center">
+        <h1 className="font-display text-4xl font-black uppercase tracking-widest text-white mb-2">
+          Glass<span className="text-orange-500">Bite</span>
+        </h1>
+        <div className="text-orange-500 font-bold text-sm tracking-[0.3em]">
+          PREPARING {progress}%
+        </div>
       </div>
     </div>
   );
