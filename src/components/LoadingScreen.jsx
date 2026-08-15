@@ -66,7 +66,7 @@ export default function LoadingScreen() {
       ease: 'power3.in',
     })
     .to(burgerRef.current, {
-      scale: 40, // massive zoom to cover the screen
+      scale: 1.5, // subtle zoom out rather than screen-covering
       opacity: 0,
       duration: 0.8,
       ease: 'expo.in',
@@ -128,9 +128,9 @@ export default function LoadingScreen() {
         {/* Hero Burger Image */}
         <img 
           ref={burgerRef}
-          src="/images/hero_burger_v3.png" 
-          alt="Loading Burger" 
-          className="w-[140px] h-auto object-contain drop-shadow-2xl z-10 relative"
+          src="/images/neon_burger_logo.jpg" 
+          alt="Loading Logo" 
+          className="w-[140px] h-auto rounded-xl object-contain drop-shadow-2xl z-10 relative"
         />
       </div>
 

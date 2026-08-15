@@ -115,7 +115,7 @@ export default function About() {
               <div className="group">
                 <div className="w-full aspect-[4/5] bg-white/5 rounded-3xl mb-6 overflow-hidden relative">
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
-                  <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1581459524458-15c0e442c4b7?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" />
+                  <div className="w-full h-full bg-[url('/images/chef_marcus.jpg')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" />
                   <div className="absolute bottom-6 left-6 z-20">
                     <h3 className="text-3xl font-display font-black text-white uppercase">Chef Marcus</h3>
                     <p className="text-orange-500 font-bold tracking-widest text-sm">HEAD CHEF</p>
@@ -128,7 +128,7 @@ export default function About() {
               <div className="group">
                 <div className="w-full aspect-[4/5] bg-white/5 rounded-3xl mb-6 overflow-hidden relative">
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
-                  <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" />
+                  <div className="w-full h-full bg-[url('/images/chef_elena.jpg')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" />
                   <div className="absolute bottom-6 left-6 z-20">
                     <h3 className="text-3xl font-display font-black text-white uppercase">Chef Elena</h3>
                     <p className="text-orange-500 font-bold tracking-widest text-sm">PASTRY & DESSERTS</p>
