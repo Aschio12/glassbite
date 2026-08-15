@@ -130,7 +130,7 @@ export default function LoadingScreen() {
           ref={burgerRef}
           src="/images/neon_burger_logo.jpg" 
           alt="Loading Logo" 
-          className="w-[140px] h-auto rounded-xl object-contain drop-shadow-2xl z-10 relative"
+          className="w-[140px] h-auto rounded-xl object-contain drop-shadow-2xl z-10 relative mix-blend-screen"
         />
       </div>
 

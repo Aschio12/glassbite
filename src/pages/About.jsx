@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ScrollReveal from '../components/ScrollReveal.jsx';
 
 export default function About() {
@@ -151,9 +152,9 @@ export default function About() {
             <p className="text-gray-300 mb-8 relative z-10 max-w-lg mx-auto">
               Join us at our flagship location in Addis Ababa and experience the future of premium dining.
             </p>
-            <a href="/menu" className="burgerhub-button-primary inline-flex items-center gap-2 relative z-10">
+            <Link to="/menu" className="inline-block px-10 py-4 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold tracking-widest text-sm transition-all relative z-10 shadow-[0_10px_20px_rgba(255,107,0,0.3)] hover:shadow-[0_10px_30px_rgba(255,107,0,0.5)]">
               EXPLORE THE MENU
-            </a>
+            </Link>
           </div>
         </ScrollReveal>
       </div>
