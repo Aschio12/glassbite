@@ -1,13 +1,11 @@
-import { CATEGORIES } from '../data/menuData.js';
-
-export default function CategoryFilter({ active, onChange }) {
+export default function CategoryFilter({ categories = [], active, onChange }) {
   return (
     <div
       role="tablist"
       aria-label="Menu categories"
       className="mx-auto flex w-full max-w-7xl flex-wrap justify-center gap-6 px-6 py-12 md:gap-12"
     >
-      {CATEGORIES.map((cat) => {
+      {categories.map((cat) => {
         const isActive = cat.id === active;
         return (
           <button
