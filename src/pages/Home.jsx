@@ -1,21 +1,44 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Hero from '../components/Hero.jsx';
 import CategoryFilter from '../components/CategoryFilter.jsx';
 import MenuGrid from '../components/MenuGrid.jsx';
 import ItemModal from '../components/ItemModal.jsx';
 import ScrollReveal from '../components/ScrollReveal.jsx';
-import { MENU_ITEMS } from '../data/menuData.js';
+import { fetchCategories, fetchMenuItems } from '../utils/api.js';
 
 export default function Home({ onAddToCart }) {
   const [category, setCategory] = useState('all');
   const [selectedItem, setSelectedItem] = useState(null);
+  
+  const [categories, setCategories] = useState([{ id: 'all', label: 'All Menu' }]);
+  const [menuItems, setMenuItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const [cats, items] = await Promise.all([
+          fetchCategories(),
+          fetchMenuItems('all') // Always fetch all items to allow local filtering, or we could fetch dynamically
+        ]);
+        setCategories([{ id: 'all', label: 'All Menu' }, ...cats]);
+        setMenuItems(items);
+      } catch (error) {
+        console.error('Error fetching menu data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
 
   const filteredItems = useMemo(
     () =>
       category === 'all'
-        ? MENU_ITEMS
-        : MENU_ITEMS.filter((item) => item.category === category),
-    [category]
+        ? menuItems
+        : menuItems.filter((item) => item.category === category),
+    [category, menuItems]
   );
 
   return (
