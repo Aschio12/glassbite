@@ -24,9 +24,7 @@ export default function Home({ onAddToCart }) {
         <Hero />
 
         <section id="menu" className="w-full pb-32 pt-12">
-          <ScrollReveal direction="up" delay={0.1}>
-            <CategoryFilter active={category} onChange={setCategory} />
-          </ScrollReveal>
+          <CategoryFilter active={category} onChange={setCategory} />
           
           <MenuGrid
             items={filteredItems}

@@ -7,13 +7,9 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
       {items.map((item, index) => {
         const isDarker = index % 3 === 0;
         return (
-          <motion.div
+          <div
             key={item.id}
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-50px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative flex cursor-pointer flex-col burgerhub-card hover:-translate-y-4"
+            className="group relative flex cursor-pointer flex-col burgerhub-card hover:-translate-y-4 transition-transform duration-500"
             onClick={() => onOpen(item)}
           >
             {/* Glowing Image Section */}
@@ -57,7 +53,7 @@ export default function MenuGrid({ items, onOpen, onAdd }) {
                 </button>
               </div>
             </div>
-          </motion.div>
+          </div>
         );
       })}
     </div>
