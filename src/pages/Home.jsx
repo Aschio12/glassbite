@@ -47,13 +47,21 @@ export default function Home({ onAddToCart }) {
         <Hero />
 
         <section id="menu" className="w-full pb-32 pt-12">
-          <CategoryFilter active={category} onChange={setCategory} />
-          
-          <MenuGrid
-            items={filteredItems}
-            onOpen={setSelectedItem}
-            onAdd={(item) => onAddToCart(item)}
-          />
+          {loading ? (
+            <div className="flex h-64 items-center justify-center">
+              <div className="h-12 w-12 animate-spin rounded-full border-4 border-orange-500 border-t-transparent"></div>
+            </div>
+          ) : (
+            <>
+              <CategoryFilter categories={categories} active={category} onChange={setCategory} />
+              
+              <MenuGrid
+                items={filteredItems}
+                onOpen={setSelectedItem}
+                onAdd={(item) => onAddToCart(item)}
+              />
+            </>
+          )}
         </section>
       </main>
 
