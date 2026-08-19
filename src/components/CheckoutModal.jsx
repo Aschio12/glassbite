@@ -1,79 +1,54 @@
-import { useState, useEffect } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useState } from 'react';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import { X, CheckCircle } from 'lucide-react';
 import { formatPrice } from '../data/menuData.js';
-import { createPaymentIntent, createOrder } from '../utils/api.js';
-
-// Load Stripe (Make sure you set VITE_STRIPE_PUBLIC_KEY in .env)
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY || 'pk_test_placeholder');
+import { createPayPalOrder, capturePayPalOrder } from '../utils/api.js';
 
 function CheckoutForm({ cart, totalAmount, onSuccess }) {
-  const stripe = useStripe();
-  const elements = useElements();
   const [error, setError] = useState(null);
-  const [isProcessing, setIsProcessing] = useState(false);
   const [customerDetails, setCustomerDetails] = useState({
     name: '',
     email: '',
     address: ''
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!stripe || !elements) return;
+  const isFormValid = customerDetails.name && customerDetails.email && customerDetails.address;
 
-    setIsProcessing(true);
-
+  const handleCreateOrder = async (data, actions) => {
     try {
-      // 1. Confirm payment
-      const { error: submitError, paymentIntent } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: window.location.origin + '/?success=true',
-          payment_method_data: {
-            billing_details: {
-              name: customerDetails.name,
-              email: customerDetails.email,
-            }
-          }
-        },
-        redirect: 'if_required' // Prevent automatic redirect so we can save order
-      });
-
-      if (submitError) {
-        setError(submitError.message);
-        setIsProcessing(false);
-        return;
-      }
-
-      if (paymentIntent && paymentIntent.status === 'succeeded') {
-        // 2. Create Order in Database
-        const items = cart.map(entry => ({
-          id: entry.item.id,
-          price: entry.item.price + entry.addOns.reduce((s, a) => s + a.price, 0),
-          quantity: entry.quantity
-        }));
-
-        await createOrder({
-          items,
-          customer_details: customerDetails,
-          total_amount: totalAmount,
-          payment_intent_id: paymentIntent.id
-        });
-
-        onSuccess();
-      }
+      const response = await createPayPalOrder(totalAmount);
+      return response.id; // Return PayPal order ID
     } catch (err) {
       console.error(err);
-      setError('An unexpected error occurred.');
+      setError('Failed to initialize PayPal order.');
+      throw err;
     }
+  };
 
-    setIsProcessing(false);
+  const handleApprove = async (data, actions) => {
+    try {
+      const items = cart.map(entry => ({
+        id: entry.item.id,
+        price: entry.item.price + entry.addOns.reduce((s, a) => s + a.price, 0),
+        quantity: entry.quantity
+      }));
+
+      await capturePayPalOrder({
+        orderID: data.orderID,
+        items,
+        customer_details: customerDetails,
+        total_amount: totalAmount
+      });
+
+      onSuccess();
+    } catch (err) {
+      console.error(err);
+      setError('Payment capture failed. Please try again.');
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="space-y-6">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-bold uppercase tracking-wider text-gray-400 mb-1">Full Name</label>
@@ -106,40 +81,34 @@ function CheckoutForm({ cart, totalAmount, onSuccess }) {
         </div>
       </div>
       
-      <div className="bg-[#111111] border border-[#222222] p-4">
-        <PaymentElement options={{ theme: 'night' }} />
-      </div>
-
       {error && <div className="text-red-500 text-sm font-bold">{error}</div>}
 
-      <button
-        disabled={isProcessing || !stripe || !elements}
-        className="w-full flex h-14 items-center justify-center bg-orange-500 font-display text-xl font-black uppercase tracking-wider text-black transition-all hover:bg-white disabled:opacity-50"
-      >
-        {isProcessing ? 'Processing...' : `Pay ${formatPrice(totalAmount)}`}
-      </button>
-    </form>
+      <div className="pt-4">
+        {!isFormValid ? (
+          <div className="text-orange-500 text-sm font-bold text-center border border-orange-500/30 bg-orange-500/10 py-3">
+            Please fill out your delivery details to pay.
+          </div>
+        ) : (
+          <div className="min-h-[150px]">
+            <PayPalButtons
+              createOrder={handleCreateOrder}
+              onApprove={handleApprove}
+              style={{ layout: "vertical", color: "gold", shape: "rect", label: "pay" }}
+              onError={(err) => {
+                console.error(err);
+                setError("PayPal encountered an error. Please try again.");
+              }}
+            />
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
 export default function CheckoutModal({ open, cart, totalAmount, onClose, onClearCart }) {
-  const [clientSecret, setClientSecret] = useState(null);
   const [success, setSuccess] = useState(false);
-
-  useEffect(() => {
-    if (open && cart.length > 0) {
-      // Map cart to expected API format
-      const items = cart.map(entry => ({
-        id: entry.item.id,
-        price: entry.item.price + entry.addOns.reduce((s, a) => s + a.price, 0),
-        quantity: entry.quantity
-      }));
-
-      createPaymentIntent(items)
-        .then(data => setClientSecret(data.clientSecret))
-        .catch(err => console.error("Failed to initialize payment intent", err));
-    }
-  }, [open, cart]);
+  const paypalClientId = import.meta.env.VITE_PAYPAL_CLIENT_ID || 'sb'; // Default to 'sb' for sandbox placeholder
 
   const handleSuccess = () => {
     setSuccess(true);
@@ -178,19 +147,12 @@ export default function CheckoutModal({ open, cart, totalAmount, onClose, onClea
             </button>
           </div>
         ) : (
-          <>
-            <h2 className="font-display text-3xl font-black uppercase text-white tracking-tight mb-8">Checkout</h2>
-            
-            {clientSecret ? (
-              <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'night' } }}>
-                <CheckoutForm cart={cart} totalAmount={totalAmount} onSuccess={handleSuccess} />
-              </Elements>
-            ) : (
-              <div className="flex justify-center py-12">
-                <div className="h-10 w-10 animate-spin rounded-full border-4 border-orange-500 border-t-transparent"></div>
-              </div>
-            )}
-          </>
+          <PayPalScriptProvider options={{ "client-id": paypalClientId }}>
+            <h2 className="font-display text-3xl font-black uppercase text-white tracking-tight mb-8">
+              Checkout <span className="text-orange-500">({formatPrice(totalAmount)})</span>
+            </h2>
+            <CheckoutForm cart={cart} totalAmount={totalAmount} onSuccess={handleSuccess} />
+          </PayPalScriptProvider>
         )}
       </div>
     </div>

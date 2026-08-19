@@ -15,13 +15,13 @@ export const fetchMenuItems = async (category = 'all') => {
   return data;
 };
 
-export const createPaymentIntent = async (items) => {
-  const { data } = await api.post('/orders/create-payment-intent', { items });
+export const createPayPalOrder = async (total_amount) => {
+  const { data } = await api.post('/orders/create-paypal-order', { total_amount });
   return data;
 };
 
-export const createOrder = async (orderData) => {
-  const { data } = await api.post('/orders', orderData);
+export const capturePayPalOrder = async (orderData) => {
+  const { data } = await api.post('/orders/capture-paypal-order', orderData);
   return data;
 };
 
