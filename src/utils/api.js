@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api', // Using Vite proxy
+  baseURL: import.meta.env.VITE_API_URL || '/api', // Use production URL or Vite proxy
 });
 
 export const fetchCategories = async () => {
